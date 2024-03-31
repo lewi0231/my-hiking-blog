@@ -13,7 +13,7 @@ type Params = {
   };
 };
 
-export const getPost = async (slug: string) => {
+const getPost = async (slug: string) => {
   const query = `
        *[_type == "post" && slug.current == "${slug}"]{
             title,

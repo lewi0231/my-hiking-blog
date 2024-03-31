@@ -18,7 +18,7 @@ const Footer = () => {
       <div className="flex justify-between px-10 mt-6 py-6 border-t-black border-2 border-opacity-20 w-full">
         copyright
         <div className=" flex justify-between items-center gap-10">
-          <div className="flex gap-2">
+          <div className="flex gap-5">
             <InstagramLogoIcon />
             <GitHubLogoIcon />
             <TwitterLogoIcon />
