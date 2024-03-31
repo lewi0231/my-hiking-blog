@@ -20,6 +20,7 @@ export const getPost = async (slug: string) => {
             slug,
             body,
             publishedAt,
+            excerpt,
             author->{
                 _id,
                 name,

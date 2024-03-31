@@ -7,7 +7,7 @@ import PostComponent from "@/components/PostCard";
 import Hero from "@/components/Hero";
 import PostListComponent from "@/components/PostListComponent";
 
-async function getPosts() {
+async function getAllPosts() {
   const query = `
     *[_type == "post"]{
       title,
@@ -27,14 +27,14 @@ async function getPosts() {
       }
     }
   `;
-  const data = await client.fetch(query);
-  return data;
+  const posts = await client.fetch(query);
+  return posts;
 }
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const posts: Post[] = await getPosts();
+  const posts: Post[] = await getAllPosts();
 
   return (
     <div>
