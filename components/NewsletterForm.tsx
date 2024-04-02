@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 
-const schema = yup.object({
+const schema = yup.object().shape({
   name: yup
     .string()
     .required("This field is required")
@@ -18,8 +18,13 @@ const schema = yup.object({
     .required("This field is required"),
 });
 
+type SchemaType = yup.InferType<typeof schema>;
+
 const NewsletterForm = () => {
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (
+    values: SchemaType,
+    { resetForm }: { resetForm: () => void }
+  ) => {
     try {
       // Perform form submission logic here, e.g., sending data to an API
       console.log(values);
