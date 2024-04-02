@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import ThemeSwitch from "./ThemeSwitch";
-import { Lilita_One } from "next/font/google";
+import { Inter, Rubik_Dirt } from "next/font/google";
 import { cn } from "@/lib/utils";
 import {
   GitHubLogoIcon,
@@ -9,8 +9,18 @@ import {
   MagnifyingGlassIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
+import InputIconOverlay from "./ui/input-icon-overlay";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Input } from "./ui/input";
 
-const font = Lilita_One({ weight: "400", subsets: ["latin"] });
+const inter = Inter({ weight: "400", subsets: ["latin"] });
+const rubik = Rubik_Dirt({ weight: "400", subsets: ["latin"] });
 
 const style = {
   icon: "h-full hover:opacity-50 cursor-pointer",
@@ -19,21 +29,35 @@ const style = {
 
 type Props = {
   className: string;
+  position: number;
 };
 
-function Navbar({ className }: Props) {
+function Navbar({ className, position }: Props) {
   return (
     <div
       className={cn(
-        `w-full bg-transparent px-20 h-24 z-20 shadow-sm`,
+        `w-full bg-transparent px-20 py-4 h-fit z-20 shadow-sm`,
         className
       )}
     >
-      <div className="flex justify-between items-center h-full">
+      <div
+        className={cn(
+          "flex justify-between items-center h-full",
+          inter?.className
+        )}
+      >
         <Link href="/">
-          <div className={cn(font.className, "text-4xl")}>RecursiveTrails</div>
+          <div className={cn(rubik?.className, "text-4xl")}>
+            RecursiveTrails
+          </div>
         </Link>
-        <div className="flex flex-col items-end justify-evenly h-full">
+        <div
+          className={`hidden ${
+            position > 0
+              ? "flex-row-reverse gap-20 items-center justify-between"
+              : "flex-col gap-4 items-end justify-evenly"
+          } lg:flex transition-all duration-200`}
+        >
           <div className="flex gap-8 items-center">
             <div className=" h-full">
               <ul className="flex gap-4 h-full">
@@ -48,21 +72,10 @@ function Navbar({ className }: Props) {
                 </li>
               </ul>
             </div>
-            <div className=" relative w-full">
-              <MagnifyingGlassIcon
-                width={24}
-                className="absolute top-0 left-0 z-10 text-black h-full opacity-25 pl-2"
-              />
-
-              <input
-                type="text"
-                placeholder="Search..."
-                className="input input-bordered w-full max-w-xs pl-7 py-1 rounded-sm"
-              />
-            </div>
+            <SearchModal position={position} />
           </div>
           <div>
-            <ul className="flex gap-6 uppercase font-bold text-lg">
+            <ul className="flex gap-6 uppercase font-bold text-sm">
               <li>
                 <Link href="/about" className={style.nav}>
                   About
@@ -95,3 +108,36 @@ function Navbar({ className }: Props) {
 }
 
 export default Navbar;
+
+const SearchModal = ({ position }: Pick<Props, "position">) => {
+  return (
+    <>
+      <Dialog>
+        <DialogTrigger asChild>
+          <button className="btn">
+            <InputIconOverlay
+              Icon={MagnifyingGlassIcon}
+              iconClass={
+                position > 0
+                  ? "opacity-100 text-white"
+                  : "opacity-25 text-black"
+              }
+              overlayIcon={position === 0}
+            />
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <Input
+            type="text"
+            className={cn(
+              "w-5/6 p-2 text-xl text-input h-16 ",
+              inter.className
+            )}
+            placeholder="Search..."
+            autoFocus
+          />
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};

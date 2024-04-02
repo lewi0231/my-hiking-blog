@@ -3,8 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
-const ThemeSwitch = () => {
+type Props = {
+  className?: string;
+};
+
+const ThemeSwitch = ({ className }: Props) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,9 +22,13 @@ const ThemeSwitch = () => {
   }
 
   return (
-    <div>
+    <div className={cn(className)}>
       <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+        {theme === "dark" ? (
+          <SunIcon width={20} height={20} />
+        ) : (
+          <MoonIcon width={20} height={20} />
+        )}
       </button>
     </div>
   );

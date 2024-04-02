@@ -3,6 +3,7 @@ export interface Post {
   slug: { current: string };
   excerpt: string;
   body: any;
+  author: { _id: string; name: string; image: { asset: { url: string } } };
   tags: Array<Tag>;
   publishedAt: string;
   mainImage: { asset: { url: string } };

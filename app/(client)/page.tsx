@@ -38,7 +38,11 @@ export default async function Home() {
 
   return (
     <div>
-      <Hero />
+      <Hero
+        mainImage="/hero_home.jpg"
+        title="Recursive Trails"
+        subtitle="Self understanding through hikes within hikes"
+      />
       <div className=" bg-white">
         <Header title="Blog Posts" />
         {posts?.length > 0 ? (
