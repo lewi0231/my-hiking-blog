@@ -10,12 +10,14 @@ type Params = {
   };
 };
 
-export const getSearchResults = async (searchQuery: string) => {
+const getSearchResults = async (searchQuery: string) => {
   const query = getAllPostsQuery();
   const posts = await client.fetch(query);
   const filteredPosts = filterPostsByText(posts, searchQuery);
   return filteredPosts;
 };
+
+export const revalidate = 60;
 
 const SearchResultPage = async ({ searchParams }: Params) => {
   const query = searchParams.query;
