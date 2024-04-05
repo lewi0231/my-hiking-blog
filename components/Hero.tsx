@@ -7,6 +7,14 @@ import { cn } from "@/lib/utils";
 import { Tag } from "@/app/utils/Interface";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
+import {
+  rubik,
+  barlow,
+  volkorn,
+  allerta,
+  montserrat,
+  inter,
+} from "@/app/utils/fonts";
 
 type Props = {
   mainImage: string;
@@ -25,24 +33,6 @@ const Hero = ({
   textClass,
   tags,
 }: Props) => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  console.log(tags);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY;
-      setScrollPosition(position);
-    };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <section className="relative h-[100vh]">
       <div className="relative w-full h-full">
@@ -61,8 +51,20 @@ const Hero = ({
             textClass
           )}
         >
-          <h1 className=" text-4xl semibold tracking-tight">{title}</h1>
-          <h5 className="text-xl font-semibold tracking-wider mt-2">
+          <h1
+            className={cn(
+              " text-5xl semibold tracking-tighter uppercase",
+              rubik.className
+            )}
+          >
+            {title}
+          </h1>
+          <h5
+            className={cn(
+              "text-2xl font-bold tracking-normal mt-2 uppercase",
+              montserrat.className
+            )}
+          >
             {subtitle}
           </h5>
           <div className="flex justify-center gap-4 mt-4">
@@ -79,14 +81,6 @@ const Hero = ({
           </div>
         </div>
       </div>
-      <Navbar
-        className={`fixed top-0 left-0 ${
-          scrollPosition > 0
-            ? "bg-black text-white transition-all duration-500 shadow-md"
-            : "transition-all duration-500"
-        }`}
-        position={scrollPosition}
-      />
     </section>
   );
 };

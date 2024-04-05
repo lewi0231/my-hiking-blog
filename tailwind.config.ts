@@ -23,6 +23,7 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      "sidebar-card": "",
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -3,17 +3,10 @@ import React from "react";
 import { Tag } from "@/app/utils/Interface";
 import Link from "next/link";
 import Header from "@/components/Header";
+import { getAllTagsQuery } from "@/app/utils/queries";
 
 const getAllTags = async () => {
-  const query = `
-    *[_type == "tag"]{
-      _id,
-      name,
-      slug,
-      "postCount": count(*[_type == "post" && references("tags", ^._id)])
-
-    }
-  `;
+  const query = getAllTagsQuery();
   const tags = client.fetch(query);
   return tags;
 };

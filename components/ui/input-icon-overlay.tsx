@@ -29,7 +29,7 @@ const InputIconOverlay = ({ Icon, iconClass, overlayIcon = true }: Props) => {
         type="text"
         placeholder="Search..."
         className={cn(
-          "input input-bordered w-full max-w-xs pl-10 py-1 rounded-sm"
+          "input input-bordered w-full max-w-xs pl-10 py-1 rounded-sm shadow-sm"
         )}
         hidden={!overlayIcon}
       />

@@ -1,38 +1,62 @@
-import { LikeIcon } from "@/components/ui/icons";
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { HeartFilledIcon, Link1Icon } from "@radix-ui/react-icons";
+"use client";
 
-import React from "react";
+import { siteConfig } from "@/app/constants";
+import { Post } from "@/app/utils/Interface";
+import TooltipWrapper from "@/components/TooltipWrapper";
+import {
+  FacebookIconWithColor,
+  TwitterIconWithColor,
+} from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
+
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookShareButton,
+  PinterestIcon,
+  PinterestShareButton,
+  TwitterShareButton,
+} from "react-share";
 
 type Props = {
   wrapperClass: string;
+  post: Post;
 };
 // TODO - need to add reaction functionality - in future might want add more share options
-const LeftSidebar = ({ wrapperClass }: Props) => {
+const LeftSidebar = ({ wrapperClass, post }: Props) => {
+  const { siteURL } = siteConfig;
+  const { slug, mainImage } = post;
+
   return (
     <aside
       className={cn(
-        "pt-14 opacity-75 flex flex-col items-center justify-center",
+        "pt-14 flex flex-col items-center justify-center gap-4 mr-2",
         wrapperClass
       )}
     >
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <LikeIcon className="w-10 h-10 hover:opacity-50 cursor-pointer" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Add a reaction</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <div className="text-center mt-2 text-lg ">0</div>
+      <TooltipWrapper label="Share to facebook">
+        <FacebookShareButton url={`${siteURL}/posts/${slug.current}`}>
+          <FacebookIconWithColor />
+        </FacebookShareButton>
+      </TooltipWrapper>
+      <TooltipWrapper label="Share to Twitter">
+        <TwitterShareButton url={`${siteURL}/posts/${slug.current}`}>
+          <TwitterIconWithColor />
+        </TwitterShareButton>
+      </TooltipWrapper>
+      <TooltipWrapper label="Share to Pinterest">
+        <PinterestShareButton
+          url={`${siteURL}/posts/${slug.current}`}
+          media={mainImage?.asset?.url}
+        >
+          <PinterestIcon className="rounded-md w-7 h-7" />
+        </PinterestShareButton>
+      </TooltipWrapper>
+      <TooltipWrapper label="Share via Email">
+        <EmailShareButton url={`${siteURL}/posts/${slug.current}`}>
+          <EmailIcon className="rounded-md w-7 h-7" />
+        </EmailShareButton>
+      </TooltipWrapper>
     </aside>
   );
 };

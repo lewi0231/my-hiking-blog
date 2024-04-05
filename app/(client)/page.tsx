@@ -6,27 +6,11 @@ import { Post } from "../utils/Interface";
 import PostComponent from "@/components/PostCard";
 import Hero from "@/components/Hero";
 import PostListComponent from "@/components/PostListComponent";
+import { getAllPostsQuery } from "../utils/queries";
+import { siteConfig } from "../constants";
 
 async function getAllPosts() {
-  const query = `
-    *[_type == "post"]{
-      title,
-      slug,
-      publishedAt,
-      excerpt,
-      _id,
-      tags[]-> {
-        _id,
-        name,
-        slug
-      },
-      mainImage{
-        asset->{
-            url
-        }
-      }
-    }
-  `;
+  const query = getAllPostsQuery();
   const posts = await client.fetch(query);
   return posts;
 }
@@ -39,9 +23,9 @@ export default async function Home() {
   return (
     <div>
       <Hero
-        mainImage="/hero_home.jpg"
-        title="Recursive Trails"
-        subtitle="Self understanding through hikes within hikes"
+        mainImage={siteConfig.mainImages.homeImage}
+        title={siteConfig.siteTitle}
+        subtitle={siteConfig.siteSubtitle}
       />
       <div className=" bg-white">
         <Header title="Blog Posts" />

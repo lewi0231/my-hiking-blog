@@ -1,17 +1,22 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import { format } from "date-fns";
-import React from "react";
-import SocialMediaIcons from "@/components/SocialMediaIcons";
+import Link from "next/link";
 
 type Props = {
   excerpt: string;
   author: string;
   date: string;
   authorImage: string;
+  slug: string;
 };
 
-const PostSummaryCard = ({ excerpt, author, date, authorImage }: Props) => {
+const PostSummaryCard = ({
+  excerpt,
+  author,
+  date,
+  authorImage,
+  slug,
+}: Props) => {
   return (
     <div className="flex flex-col text-justify gap-4">
       <h4 className=" font-semibold text-lg leading-snug tracking-wide text-gray-700 italic">
@@ -30,7 +35,6 @@ const PostSummaryCard = ({ excerpt, author, date, authorImage }: Props) => {
           {format(date, "do MMMM yyyy")}
         </span>
       </p>
-      <SocialMediaIcons />
     </div>
   );
 };

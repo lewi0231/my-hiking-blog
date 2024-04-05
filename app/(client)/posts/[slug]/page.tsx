@@ -11,6 +11,9 @@ import PostSummaryCard from "./post-summary-card";
 import { Separator } from "@/components/ui/separator";
 import LeftSidebar from "./left-sidebar";
 import RightSidebar from "./right-sidebar";
+import { getPostQuery } from "@/app/utils/queries";
+import { Metadata } from "next";
+import { siteConfig } from "@/app/constants";
 
 type Params = {
   params: {
@@ -18,36 +21,34 @@ type Params = {
   };
 };
 
-const getPost = async (slug: string) => {
-  const query = `
-       *[_type == "post" && slug.current == "${slug}"]{
-            title,
-            slug,
-            body,
-            publishedAt,
-            excerpt,
-            author->{
-                _id,
-                name,
-                image{
-                  asset->{
-                    url
-                  }
-                }
-            },
-            tags[]->{
-                _id,
-                name,
-                slug
-            },
-             mainImage{
-                asset->{
-                    url
-                }
-            }
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const slug = params?.slug;
+  const query = getPostQuery(slug);
 
-        }[0]
-    `;
+  const post: Post = await client.fetch(query);
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    authors: [post.author],
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [post?.mainImage?.asset?.url],
+      url: `${siteConfig.siteURL}/${post.slug.current}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post?.title,
+      description: post?.excerpt,
+      images: [post?.mainImage?.asset?.url],
+    },
+  };
+}
+
+const getPost = async (slug: string) => {
+  const query = getPostQuery(slug);
 
   const post = await client.fetch(query);
   return post;
@@ -63,39 +64,60 @@ const PostPage = async ({ params }: Params) => {
   }
 
   return (
-    <article>
-      <Hero
-        mainImage={post.mainImage.asset.url}
-        title={post?.title}
-        textClass="uppercase"
-        tags={post?.tags}
-      />
-      <div className=" bg-gray-100 w-full py-10 px-2 sm:px-6 flex justify-center h-full">
-        <div className="flex gap-5 justify-center w-full sm:max-w-6xl h-full">
-          <LeftSidebar wrapperClass="sticky top-24 sm:flex hidden flex-none max-w-12 h-32" />
-          <main className=" pt-14 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
-            <PostSummaryCard
-              author={post?.author.name}
-              excerpt={post?.excerpt}
-              date={post?.publishedAt}
-              authorImage={post?.author?.image?.asset?.url}
+    <>
+      <head>
+        <meta property="og:title" content={post?.title} />
+        <meta property="og:description" content={post?.excerpt} />
+        <meta property="og:image" content={post?.mainImage?.asset?.url} />
+        <meta
+          property="og:url"
+          content={`${siteConfig.siteURL}/posts/${post?.slug.current}`}
+        />
+        <meta property="og:type" content="article" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post?.title} />
+        <meta name="twitter:description" content={post?.excerpt} />
+        <meta name="twitter:image" content={post?.mainImage?.asset?.url} />
+      </head>
+      <article>
+        <Hero
+          mainImage={post.mainImage.asset.url}
+          title={post?.title}
+          textClass="uppercase"
+          tags={post?.tags}
+        />
+        <div className=" bg-gray-100 w-full py-10 px-2 sm:px-6 flex justify-center h-full">
+          <div className="flex gap-5 justify-center w-full sm:max-w-6xl h-full">
+            <LeftSidebar
+              wrapperClass="sticky top-24 sm:flex hidden flex-none max-w-12 h-32"
+              post={post}
             />
-            <Separator className="mt-10" />
-            <section className="w-full prose-p:tracking-normal prose-headings:font-semibold prose-headings:mt-10 prose-headings:uppercase prose-headings:text-2xl m-auto prose-p:my-4 py-6 text-gray-800 text-lg prose-p:text-justify pb-10">
-              <PortableText
-                value={post?.body}
-                components={myPortableTextComponents}
+            <main className=" pt-14 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
+              <PostSummaryCard
+                author={post?.author.name}
+                excerpt={post?.excerpt}
+                date={post?.publishedAt}
+                authorImage={post?.author?.image?.asset?.url}
+                slug={params?.slug}
               />
-            </section>
-          </main>
-          <RightSidebar
-            wrapperClass="sm:block flex-grow-0 hidden flex-shrink-1 sm:w-[450px] min-w-1"
-            authorImage={post?.author?.image?.asset?.url}
-            authorName={post?.author?.name}
-          />
+              <Separator className="mt-10" />
+              <section className="w-full prose-p:tracking-normal prose-headings:font-semibold prose-headings:mt-10 prose-headings:uppercase prose-headings:text-2xl m-auto prose-p:my-4 py-6 text-gray-800 text-lg prose-p:text-justify pb-10">
+                <PortableText
+                  value={post?.body}
+                  components={myPortableTextComponents}
+                />
+              </section>
+            </main>
+            <RightSidebar
+              wrapperClass="sm:block flex-grow-0 hidden flex-shrink-1 sm:w-[450px] min-w-1"
+              authorImage={post?.author?.image?.asset?.url}
+              authorName={post?.author?.name}
+            />
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 
