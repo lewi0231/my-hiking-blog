@@ -29,7 +29,7 @@ async function fetchInstagramData() {
   }
 }
 
-export async function getPhotos() {
+async function getPhotos() {
   console.log("placeholder");
 }
 
