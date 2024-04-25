@@ -105,12 +105,6 @@ const PostPage = async ({ params }: Params) => {
                   components={myPortableTextComponents}
                 />
               </section>
-              <Separator className="my-4" />
-              <div>
-                <h1 className="text-2xl uppercase py-10 font-semibold">
-                  Comments
-                </h1>
-              </div>
             </main>
             <RightSidebar
               wrapperClass="sm:block flex-grow-0 hidden flex-shrink-1 sm:w-[450px] min-w-1"
