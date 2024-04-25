@@ -1,6 +1,7 @@
 import { siteConfig } from "@/app/constants";
 import { Post } from "@/app/utils/Interface";
 import { getPostQuery } from "@/app/utils/queries";
+import CommentForm from "@/components/CommentForm";
 import Hero from "@/components/Hero";
 import { Separator } from "@/components/ui/separator";
 import { client } from "@/sanity/lib/client";
@@ -90,7 +91,7 @@ const PostPage = async ({ params }: Params) => {
               wrapperClass="sticky top-24 sm:flex hidden flex-none max-w-12 h-32"
               post={post}
             />
-            <main className=" pt-14 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
+            <section className=" pt-14 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
               <PostSummaryCard
                 author={post?.author.name}
                 excerpt={post?.excerpt}
@@ -110,8 +111,9 @@ const PostPage = async ({ params }: Params) => {
                 <h1 className="text-2xl uppercase py-10 font-semibold">
                   Comments
                 </h1>
+                <CommentForm postId={post._id} />
               </div>
-            </main>
+            </section>
             <RightSidebar
               wrapperClass="sm:block flex-grow-0 hidden flex-shrink-1 sm:w-[450px] min-w-1"
               authorImage={post?.author?.image?.asset?.url}
