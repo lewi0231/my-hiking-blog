@@ -14,6 +14,7 @@ const getPostsByTag = async (tag: string) => {
   const query = getPostsByTagQuery(tag);
 
   const posts = await client.fetch(query);
+
   return posts;
 };
 
@@ -23,7 +24,7 @@ const TagDetailsPage = async ({ params }: Params) => {
   const posts: Post[] = await getPostsByTag(params.slug);
 
   return (
-    <div>
+    <div className=" bg-gradient-to-r to-slate-50 from-stone-200">
       <Header title={`#${params?.slug}`} />
       <div>{posts?.length > 0 ? <PostListComponent posts={posts} /> : ""}</div>
     </div>

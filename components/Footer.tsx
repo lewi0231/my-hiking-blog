@@ -2,6 +2,7 @@ import React from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import {
   GitHubLogoIcon,
+  HeartFilledIcon,
   InstagramLogoIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
@@ -18,33 +19,57 @@ const Footer = () => {
     <div className="w-full bg-gray-200 h-fit">
       <div className="m-auto max-w-[90vw]">
         <div className="flex justify-between px-14 pt-10 pb-4 items-center text-right">
-          <TooltipWrapper label="If you'd like to support me">
-            <Button
-              variant="ghost"
-              className="flex justify-between font-semibold px-2 gap-2"
-              size="lg"
-            >
-              <CoffeeIcon />
-              Buy Me a Coffee
-            </Button>
-          </TooltipWrapper>
-
-          <div className="flex gap-32 justify-center items-center">
-            <div className="flex flex-col justify-center items-center gap-2">
-              <h2 className="text-2xl font-semibold">Services</h2>
-              <ul className="flex flex-col gap-1 items-center">
-                <li>Website </li>
-                <li>stuff again</li>
-                <li>more stuff</li>
-              </ul>
+          <div className="space-y-4 flex justify-between lg:items-center items-end h-full w-full gap-4">
+            <div className="flex flex-shrink lg:flex-row flex-col flex-1 justify-start gap-10">
+              <TooltipWrapper label="Support this great organisation!">
+                <Button
+                  className="flex justify-start font-semibold gap-2 px-2 w-fit items-center sm:w-[180px]"
+                  size="icon"
+                >
+                  <HeartFilledIcon className="w-4 h-4 sm:w-6 sm:h-6" />
+                  <a
+                    href={process.env.BEYOND_BLUE_DONATION_LINK}
+                    target="__blank"
+                    className="text-xs sm:text-medium"
+                  >
+                    Donate Beyond Blue
+                  </a>
+                </Button>
+              </TooltipWrapper>
+              <TooltipWrapper label="If you'd like to support me">
+                <Button
+                  variant="outline"
+                  className="flex justify-start font-semibold px-2 gap-2 w-fit sm:w-[180px] items-center"
+                  size="icon"
+                >
+                  <CoffeeIcon className="w-4 h-4 sm:w-6 sm:h-6" />
+                  <a
+                    href={process.env.STRIPE_PAYMENT_LINK}
+                    target="__blank"
+                    className="text-xs sm:text-medium"
+                  >
+                    Buy Me a Coffee
+                  </a>
+                </Button>
+              </TooltipWrapper>
             </div>
-            <div className="flex flex-col gap-2 text-gray-800">
-              <h2 className="text-2xl font-semibold">About</h2>
-              <ul className="flex flex-col gap-1">
-                <li>stuff</li>
-                <li>stuff again</li>
-                <li>more stuff</li>
-              </ul>
+            <div className="flex justify-end flex-1 gap-14 items-start">
+              <div className="flex flex-col justify-center items-center gap-2">
+                <h2 className="text-2xl font-semibold">Services</h2>
+                <ul className="flex flex-col gap-1 items-center">
+                  <li>Website </li>
+                  <li>stuff again</li>
+                  <li>more stuff</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-2 text-gray-800">
+                <h2 className="text-2xl font-semibold">About</h2>
+                <ul className="flex flex-col gap-1">
+                  <li>stuff</li>
+                  <li>stuff again</li>
+                  <li>more stuff</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

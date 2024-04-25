@@ -1,19 +1,17 @@
-import { Post, Tag } from "@/app/utils/Interface";
+import { siteConfig } from "@/app/constants";
+import { Post } from "@/app/utils/Interface";
+import { getPostQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
+import { Separator } from "@/components/ui/separator";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import React from "react";
-import PostSummaryCard from "./post-summary-card";
-import { Separator } from "@/components/ui/separator";
-import LeftSidebar from "./left-sidebar";
-import RightSidebar from "./right-sidebar";
-import { getPostQuery } from "@/app/utils/queries";
 import { Metadata } from "next";
-import { siteConfig } from "@/app/constants";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import LeftSidebar from "./left-sidebar";
+import PostSummaryCard from "./post-summary-card";
+import RightSidebar from "./right-sidebar";
 
 type Params = {
   params: {
@@ -83,11 +81,10 @@ const PostPage = async ({ params }: Params) => {
       <article>
         <Hero
           mainImage={post.mainImage.asset.url}
-          title={post?.title}
-          textClass="uppercase"
+          subtitle={post?.title}
           tags={post?.tags}
         />
-        <div className=" bg-gray-100 w-full py-10 px-2 sm:px-6 flex justify-center h-full">
+        <div className=" bg-gray-100 w-full py-10 px-2 sm:px-6 flex flex-col justify-center items-center h-full">
           <div className="flex gap-5 justify-center w-full sm:max-w-6xl h-full">
             <LeftSidebar
               wrapperClass="sticky top-24 sm:flex hidden flex-none max-w-12 h-32"
@@ -108,6 +105,12 @@ const PostPage = async ({ params }: Params) => {
                   components={myPortableTextComponents}
                 />
               </section>
+              <Separator className="my-4" />
+              <div>
+                <h1 className="text-2xl uppercase py-10 font-semibold">
+                  Comments
+                </h1>
+              </div>
             </main>
             <RightSidebar
               wrapperClass="sm:block flex-grow-0 hidden flex-shrink-1 sm:w-[450px] min-w-1"

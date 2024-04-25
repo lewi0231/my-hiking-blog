@@ -1,16 +1,24 @@
 "use client";
 
 import { Field, Form, Formik, FormikHelpers } from "formik";
+import { CalendarHeart } from "lucide-react";
 import { Button } from "./ui/button";
 
 import {
   newsletterSchema,
   NewsletterSchema,
 } from "@/app/utils/validation-helper";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Dialog, DialogContent } from "./ui/dialog";
 
-const NewsletterForm = () => {
+type Props = {
+  className?: string;
+  columnInputs?: boolean;
+  label?: string;
+};
+
+const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
   const [error, setError] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -40,9 +48,9 @@ const NewsletterForm = () => {
   };
 
   return (
-    <section className="sticky top-20 bg-gray-50 rounded-md shadow-md p-4">
+    <section className={cn(" p-4", className)}>
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Stay Up To Date</h2>
+        {label && <h2 className="text-2xl font-semibold pb-2">{label}</h2>}
         <Formik
           initialValues={{
             name: "",
@@ -52,31 +60,50 @@ const NewsletterForm = () => {
           validationSchema={newsletterSchema}
         >
           {({ errors, touched }) => (
-            <Form className="flex flex-col gap-4">
-              <Field
-                id="name"
-                name="name"
-                placeholder="First name"
-                type="text"
-                className={inputStyle}
-              />
-              {errors.name && touched.name ? <div>{errors.name}</div> : ""}
-              <Field
-                id="email"
-                name="email"
-                placeholder="email@example.com"
-                type="email"
-                className={inputStyle}
-              />
-              {errors.email && touched.email ? <div>{errors.email}</div> : ""}
-              <Button type="submit" size="lg">
-                Submit
+            <Form
+              className={cn(
+                "flex gap-4",
+                columnInputs ? "flex-col" : "flex-row"
+              )}
+            >
+              <div className="w-full space-y-4">
+                <Field
+                  id="name"
+                  name="name"
+                  placeholder="First name"
+                  type="text"
+                  className={cn(inputStyle, "bg-white py-6")}
+                />
+                {errors.name && touched.name ? (
+                  <div className="pl-2">{errors.name}</div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="w-full space-y-4">
+                <Field
+                  id="email"
+                  name="email"
+                  placeholder="email@example.com"
+                  type="email"
+                  className={cn(inputStyle, "bg-white py-6")}
+                />
+                {errors.email && touched.email ? (
+                  <div className="pl-2">{errors.email}</div>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <Button type="submit" size="lg" className="py-6">
+                Subscribe
               </Button>
             </Form>
           )}
         </Formik>
         <Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
-          <DialogContent>
+          <DialogContent className="flex items-center gap-2 py-4">
+            <CalendarHeart />
             Congratulations, you&apos;ve successfully signed up.
           </DialogContent>
         </Dialog>

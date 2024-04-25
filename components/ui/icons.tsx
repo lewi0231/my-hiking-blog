@@ -79,7 +79,7 @@ export const LikeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const CoffeeIcon = () => {
+export const CoffeeIcon = ({ className }: { className: string }) => {
   return (
     <svg
       viewBox="0 0 1024 1024"
@@ -88,6 +88,7 @@ export const CoffeeIcon = () => {
       width={32}
       height={32}
       stroke="currentColor"
+      className={className}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -170,19 +171,15 @@ export const MountainCircleIcon = ({ className }: Props) => {
   );
 };
 
-export const Hiker = ({ className }: Props) => {
+export const HikerIconBlack = ({ className }: Props) => {
   return (
     <svg
-      fill="#000000"
-      height="200px"
-      width="200px"
-      version="1.1"
-      id="Layer_1"
+      viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="-12.8 -12.8 153.60 153.60"
-      stroke="#000000"
-      strokeWidth="0.00128"
-      transform="matrix(1, 0, 0, 1, 0, 0)"
+      aria-hidden="true"
+      role="img"
+      preserveAspectRatio="xMidYMid meet"
+      fill="#000000"
       className={className}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -190,18 +187,13 @@ export const Hiker = ({ className }: Props) => {
         id="SVGRepo_tracerCarrier"
         strokeLinecap="round"
         strokeLinejoin="round"
-        stroke="#CCCCCC"
-        strokeWidth="0.256"
       ></g>
       <g id="SVGRepo_iconCarrier">
-        {" "}
-        <g>
-          {" "}
-          <path d="M63.5,20c5.5,0,10-4.5,10-10c0-5.5-4.5-10-10-10c-5.5,0-10,4.5-10,10C53.5,15.5,58,20,63.5,20z"></path>{" "}
-          <path d="M39.7,50.5l7-28.9c0.4-1.5-0.6-3.1-2.1-3.5l-8.3-2c-1.6-0.4-3.1,0.6-3.5,2.1l-7,28.9c-0.4,1.5,0.6,3.1,2.1,3.5l8.3,2 C37.7,53,39.3,52.1,39.7,50.5z"></path>{" "}
-          <path d="M104,31.6c-1.1,0-2,0.9-2.3,2L85,124.5c0,0.1,0,0.1,0,0.2c0,1.3,1,2.3,2.3,2.3c1.2,0,2.1-0.9,2.3-2l16.7-90.8v-0.2 C106.3,32.7,105.3,31.6,104,31.6z"></path>{" "}
-          <path d="M64.4,52.5l1.3-5.8l1,4.6c0.9,3,3.7,3.3,3.7,3.3l16.2,4.1c0.3,0.1,0.6,0.1,1,0.1c2.7,0,4.8-2.1,4.8-4.8 c0-2.3-1.6-4.2-3.7-4.7l-14.1-3.5L70.8,30c-1.8-8.8-10.2-8.6-10.2-8.6c-8.1-0.2-10.2,8.3-10.2,8.3l-21.1,88.7 c-0.1,0.5-0.1,0.9-0.1,1.4c0,3.9,3.1,7,7,7c3.2,0,5.9-2.1,6.7-5L55,72l11.5,49.6c0.7,3.1,3.5,5.3,6.8,5.3c3.9,0,7-3.1,7-7 c0-0.5-0.1-1-0.2-1.5L64.4,52.5z"></path>{" "}
-        </g>{" "}
+        <path
+          d="M46.43 7.5c4.055 0 7.337 3.379 7.337 7.434c0 4.054-3.282 7.433-7.337 7.433s-7.434-3.379-7.434-7.433c0-4.055 3.38-7.434 7.434-7.434zm.483 15.543c2.79-.087 4.947 1.649 6.082 3.476l7.723 12.84l13.516 5.696c3.861 1.64 2.027 6.757-2.317 5.599a5.015 5.015 0 0 0-.483-.29l-9.075 20.08s2.896 6.662 6.565 14.193c3.572 7.626-5.117 10.909-8.303 3.861l-3.185-7.144l-4.634 10.137l-1.931-.869l5.406-11.778l-9.075-19.79c-.386.096-.772 0-1.255 0c0 0-10.523 23.941-13.42 30.217c-2.799 6.275-11.101 2.51-8.302-3.67c2.8-6.178 16.123-36.202 16.123-36.202l-9.903.162c-1.5.013-1.859-.226-1.954-1.35c-.153-2.97-.415-9.958.272-13.197c.886-4.175 1.415-8.77 4.344-10.137c2.93-1.367 8.013 2.414 8.013 2.414c.772-2.51 3.186-4.248 5.793-4.248zm5.985 15.06V49.69l8.303 18.15l8.302-18.247l-12.067-5.02c-.58-.29-1.062-.676-1.449-1.255z"
+          fill="#000000"
+          fill-rule="evenodd"
+        ></path>
       </g>
     </svg>
   );
@@ -238,6 +230,35 @@ export const MountainIcon = ({ className }: Props) => {
         <g id="_x31_7"></g> <g id="_x31_8"></g> <g id="_x31_9"></g>{" "}
         <g id="_x32_0"></g> <g id="_x32_1"></g> <g id="_x32_2"></g>{" "}
         <g id="_x32_3"></g> <g id="_x32_4"></g> <g id="_x32_5"></g>{" "}
+      </g>
+    </svg>
+  );
+};
+
+export const HikerIconWhite = ({ className }: Props) => {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+      preserveAspectRatio="xMidYMid meet"
+      fill="#ffffff"
+      stroke="#ffffff"
+      className={className}
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M46.43 7.5c4.055 0 7.337 3.379 7.337 7.434c0 4.054-3.282 7.433-7.337 7.433s-7.434-3.379-7.434-7.433c0-4.055 3.38-7.434 7.434-7.434zm.483 15.543c2.79-.087 4.947 1.649 6.082 3.476l7.723 12.84l13.516 5.696c3.861 1.64 2.027 6.757-2.317 5.599a5.015 5.015 0 0 0-.483-.29l-9.075 20.08s2.896 6.662 6.565 14.193c3.572 7.626-5.117 10.909-8.303 3.861l-3.185-7.144l-4.634 10.137l-1.931-.869l5.406-11.778l-9.075-19.79c-.386.096-.772 0-1.255 0c0 0-10.523 23.941-13.42 30.217c-2.799 6.275-11.101 2.51-8.302-3.67c2.8-6.178 16.123-36.202 16.123-36.202l-9.903.162c-1.5.013-1.859-.226-1.954-1.35c-.153-2.97-.415-9.958.272-13.197c.886-4.175 1.415-8.77 4.344-10.137c2.93-1.367 8.013 2.414 8.013 2.414c.772-2.51 3.186-4.248 5.793-4.248zm5.985 15.06V49.69l8.303 18.15l8.302-18.247l-12.067-5.02c-.58-.29-1.062-.676-1.449-1.255z"
+          fill="#FFFFFF"
+          fill-rule="evenodd"
+        ></path>
       </g>
     </svg>
   );

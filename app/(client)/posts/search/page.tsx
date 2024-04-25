@@ -24,11 +24,8 @@ const SearchResultPage = async ({ searchParams }: Params) => {
 
   const posts = await getSearchResults(query);
 
-  console.log("filtered posts", posts);
-
   return (
     <main>
-      {/* <Navbar className={`fixed top-0 left-0`} /> */}
       <div className=" bg-white">
         <Header title="Search Results" />
         {posts?.length > 0 ? (

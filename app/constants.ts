@@ -1,6 +1,6 @@
 export const siteConfig = {
   siteTitle: "Trail Wisdom",
-  siteSubtitle: "Where minimalism, nature and wellbeing meet",
+  siteSubtitle: "Self-understanding through adventure.",
   siteURL: "https://trailwisdom.xyz",
   siteDescription:
     "I'm new thru-hiking but I'm also a software developer so I thought that it would be fun to create a blog that documents my journey into thru-hiking.",
@@ -16,5 +16,9 @@ export const siteConfig = {
   },
   mainImages: {
     homeImage: "/hero_home.jpg",
+    aboutImage: "/about_image.jpg",
+  },
+  pageImages: {
+    about: "/about_image_2.jpeg",
   },
 };

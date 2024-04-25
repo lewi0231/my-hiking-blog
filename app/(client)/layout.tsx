@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import "./globals.css";
-import { Provider } from "../utils/provider";
-import { cn } from "@/lib/utils";
 import Footer from "@/components/Footer";
-import { siteConfig } from "../constants";
 import Navbar from "@/components/Navbar";
-
-const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
+import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+import { siteConfig } from "../constants";
+import { eastSeaDokdo, karla, raleway } from "../utils/fonts";
+import { Provider } from "../utils/provider";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -28,15 +26,19 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen bg-background font-sans antialiased relative",
+          karla.variable,
+          eastSeaDokdo.variable,
+          raleway.variable
         )}
       >
-        <Navbar className="fixed top-0 left-0" />
-        <Provider>
-          <main>{children}</main>
-          <Footer />
-        </Provider>
+        <main className="font-raleway">
+          <Navbar className="fixed top-0 left-0" />
+          <Provider>
+            {children}
+            <Footer />
+          </Provider>
+        </main>
       </body>
     </html>
   );

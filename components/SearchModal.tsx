@@ -1,14 +1,14 @@
 "use client";
 
-import { Field, Form, Formik, FormikHelpers } from "formik";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { SearchSchema, searchSchema } from "@/app/utils/validation-helper";
-import InputIconOverlay from "./ui/input-icon-overlay";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { inter } from "@/app/utils/fonts";
+import { SearchSchema, searchSchema } from "@/app/utils/validation-helper";
+import { cn } from "@/lib/utils";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Field, Form, Formik, FormikHelpers } from "formik";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import InputIconOverlay from "./ui/input-icon-overlay";
 
 type Props = {
   className: string;
@@ -46,9 +46,10 @@ const SearchModal = ({ position }: Pick<Props, "position">) => {
             <InputIconOverlay
               Icon={MagnifyingGlassIcon}
               iconClass={
-                position > 0
-                  ? "opacity-100 text-white"
-                  : "opacity-25 text-black"
+                "opacity-50 text-black"
+                // position > 0
+                //   ? "opacity-100 text-white"
+                //   : "opacity-25 text-black"
               }
               overlayIcon={position === 0}
             />
@@ -66,7 +67,10 @@ const SearchModal = ({ position }: Pick<Props, "position">) => {
               <Field
                 type="text"
                 name="query"
-                className={cn(" p-2 text-xl h-full w-full", inter.className)}
+                className={cn(
+                  " py-2 px-6 text-xl h-full w-full",
+                  inter.className
+                )}
                 placeholder="Search..."
                 onKeyDown={(e: React.KeyboardEvent) => {
                   if (e.key === "Enter") {

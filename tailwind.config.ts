@@ -22,6 +22,9 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        "east-sea-dokdo": "var(--east-sea-dokdo)",
+        karla: "var(--karla)",
+        raleway: "var(--raleway)",
       },
       "sidebar-card": "",
       colors: {

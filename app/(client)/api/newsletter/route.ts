@@ -5,7 +5,6 @@ import {
   validateFormData,
 } from "@/app/utils/validation-helper";
 import mailchimp from "@mailchimp/mailchimp_marketing";
-import { FormikValues, validateYupSchema } from "formik";
 import md5 from "md5";
 
 mailchimp.setConfig({
@@ -36,7 +35,6 @@ export async function POST(request: Request) {
     }
   );
 
-  console.log(response);
   return NextResponse.json({
     ...data,
   });

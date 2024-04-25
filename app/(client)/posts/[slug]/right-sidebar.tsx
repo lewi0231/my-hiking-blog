@@ -1,9 +1,6 @@
 import NewsletterForm from "@/components/NewsletterForm";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import React from "react";
 
 type Props = {
   wrapperClass: string;
@@ -28,7 +25,11 @@ const RightSidebar = ({ wrapperClass, authorImage, authorName }: Props) => {
           standard.
         </div>
       </section>
-      <NewsletterForm />
+      <NewsletterForm
+        className="sticky top-24 rounded-md shadow-md bg-gray-50"
+        columnInputs={true}
+        label="Keep up to date"
+      />
     </aside>
   );
 };

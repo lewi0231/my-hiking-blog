@@ -1,20 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import { cn } from "@/lib/utils";
 import { Tag } from "@/app/utils/Interface";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
-import {
-  rubik,
-  barlow,
-  volkorn,
-  allerta,
-  montserrat,
-  inter,
-} from "@/app/utils/fonts";
 
 type Props = {
   mainImage: string;
@@ -46,23 +36,17 @@ const Hero = ({
         />
         <div
           className={cn(
-            // " absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-10 text-center"
-            "absolute bottom-1/4 left-1/2 -translate-x-1/2 text-white text-center",
+            "absolute text-white text-center",
+            textPosition === "center"
+              ? "bottom-1/4 left-1/2 -translate-x-1/2 "
+              : " bottom-[100px] left-[120px] ",
             textClass
           )}
         >
-          <h1
-            className={cn(
-              " text-5xl semibold tracking-tighter uppercase",
-              rubik.className
-            )}
-          >
-            {title}
-          </h1>
+          <h1 className={cn(" text-4xl", " font-east-sea-dokdo")}>{title}</h1>
           <h5
             className={cn(
-              "text-2xl font-bold tracking-normal mt-2 uppercase",
-              montserrat.className
+              "text-4xl font-light tracking-normal font-raleway uppercase"
             )}
           >
             {subtitle}

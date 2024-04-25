@@ -1,6 +1,6 @@
 "use client";
 
-import { inter, rubik } from "@/app/utils/fonts";
+import { inter } from "@/app/utils/fonts";
 import { cn } from "@/lib/utils";
 import {
   Cross1Icon,
@@ -10,10 +10,9 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
-import SearchModal from "./SearchModal";
+import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { siteConfig } from "@/app/constants";
-import { Hiker, MountainCircleIcon, MountainIcon } from "./ui/icons";
+import SearchModal from "./SearchModal";
 
 const NavLinks = ({
   className,
@@ -24,26 +23,65 @@ const NavLinks = ({
 }) => {
   return (
     <>
-      <li className=" w-full">
+      <li className={cn("w-full")}>
         <Link
-          href="/about"
-          className={cn("w-full transition-all duration-300", className)}
+          href="/"
+          className={cn(
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
+            "lg:text-xl ",
+            className
+          )}
           onClick={() => {
             if (setIsMobile) setIsMobile(false);
           }}
         >
-          About
+          Home.
         </Link>
       </li>
-      <li className=" w-full">
+      <li className={cn(" w-full")}>
         <Link
-          href="/about"
-          className={cn("w-full transition-all duration-300", className)}
+          href="/blog"
+          className={cn(
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer py-10 lg:py-0",
+            "lg:text-xl lg:hover:text-[1rem]",
+            className
+          )}
           onClick={() => {
             if (setIsMobile) setIsMobile(false);
           }}
         >
-          Contact
+          Blog.
+        </Link>
+      </li>
+
+      <li className={cn(" w-full")}>
+        <Link
+          href="/gallery"
+          className={cn(
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer   py-10 lg:py-0",
+            "lg:text-xl lg:hover:text-[1rem]",
+            className
+          )}
+          onClick={() => {
+            if (setIsMobile) setIsMobile(false);
+          }}
+        >
+          Photos.
+        </Link>
+      </li>
+      <li className={cn(" w-full")}>
+        <Link
+          href="/about"
+          className={cn(
+            "w-full text-3xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
+            "lg:text-xl lg:hover:text-[1rem]",
+            className
+          )}
+          onClick={() => {
+            if (setIsMobile) setIsMobile(false);
+          }}
+        >
+          About.
         </Link>
       </li>
     </>
@@ -51,7 +89,7 @@ const NavLinks = ({
 };
 
 const style = {
-  icon: "h-full hover:opacity-50 cursor-pointer",
+  icon: "h-full hover:opacity-50 cursor-pointer hover:-translate-y-1 transition-all duration-300",
 };
 
 type Props = {
@@ -61,6 +99,8 @@ type Props = {
 function Navbar({ className }: Props) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const isDarkBackground = pathname === "/blog";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +119,6 @@ function Navbar({ className }: Props) {
   useEffect(() => {
     const handleResize = () => {
       if (isMobile && window.innerWidth >= 1024) {
-        console.debug("altering the isMobile to", !isMobile);
         setIsMobile(false);
       }
     };
@@ -90,11 +129,13 @@ function Navbar({ className }: Props) {
   });
 
   return (
-    <nav className="relative">
+    <nav className="relative ">
       <div
         className={cn(
-          `w-full bg-transparent px-10 sm:px-20 py-4 h-fit z-20 shadow-sm transition duration-300 `,
-          scrollPosition > 0 ? "bg-black text-white shadow-md" : "",
+          `w-full bg-transparent px-10 sm:px-20 py-4 h-fit z-20 transition duration-300 `,
+          scrollPosition > 0
+            ? " bg-gradient-to-r from-white via-gray-100 to-white shadow-sm py-2"
+            : "",
           className
         )}
       >
@@ -104,7 +145,14 @@ function Navbar({ className }: Props) {
             inter?.className
           )}
         >
-          <Logo scrollPosition={scrollPosition} />
+          <Logo
+            scrollPosition={scrollPosition}
+            className={
+              isDarkBackground && scrollPosition === 0
+                ? "text-white"
+                : "text-black"
+            }
+          />
           {/* <Link href="/">
             <div
               className={cn(
@@ -118,29 +166,61 @@ function Navbar({ className }: Props) {
           <div
             className={`hidden ${
               scrollPosition > 0
-                ? "flex-row-reverse gap-20 items-center justify-between"
+                ? "flex-row-reverse w-1/2 items-center justify-between"
                 : "flex-col gap-4 items-end justify-evenly"
             } lg:flex transition-all duration-300`}
           >
-            <div className="flex gap-8 items-center">
+            <div className="flex gap-8 items-center ml-20">
               <div className=" h-full">
                 <ul className="flex gap-4 h-full">
                   <li className="h-full align-middle">
-                    <InstagramLogoIcon className={style.icon} />
+                    <InstagramLogoIcon
+                      className="icon-nav"
+                      color={
+                        isDarkBackground && scrollPosition === 0
+                          ? "white"
+                          : "black"
+                      }
+                    />
                   </li>
                   <li>
-                    <GitHubLogoIcon className={style.icon} />
+                    <GitHubLogoIcon
+                      className="icon-nav"
+                      color={
+                        isDarkBackground && scrollPosition === 0
+                          ? "white"
+                          : "black"
+                      }
+                    />
                   </li>
                   <li>
-                    <TwitterLogoIcon className={style.icon} />
+                    <TwitterLogoIcon
+                      className="icon-nav"
+                      color={
+                        isDarkBackground && scrollPosition === 0
+                          ? "white"
+                          : "black"
+                      }
+                    />
                   </li>
                 </ul>
               </div>
               <SearchModal position={scrollPosition} />
             </div>
             <div>
-              <ul className="flex gap-6 uppercase font-bold text-sm">
-                <NavLinks className="hover:opacity-50" />
+              <ul className="flex gap-14 font-normal uppercase tracking-wide ">
+                <NavLinks
+                  className={cn(
+                    "hover:opacity-50 ",
+                    " border-b-2 border-transparent  hover:bg-transparent",
+                    isDarkBackground && scrollPosition === 0
+                      ? "text-white hover:text-opacity-70 hover:border-b-white"
+                      : "hover:text-black hover:border-b-gray-700 ",
+                    scrollPosition
+                      ? "lg:text-sm lg:hover:text-[1rem]"
+                      : "lg:hover:text-[1.3rem]"
+                  )}
+                />
               </ul>
             </div>
           </div>
@@ -152,25 +232,33 @@ function Navbar({ className }: Props) {
           >
             {isMobile ? (
               <Cross1Icon
-                width={24}
-                height={24}
+                width={28}
+                height={28}
                 className=""
+                color={isDarkBackground ? "white" : "black"}
                 onClick={(e) => {}}
               />
             ) : (
-              <HamburgerMenuIcon width={24} height={24} />
+              <HamburgerMenuIcon
+                color={isDarkBackground ? "white" : "black"}
+                width={28}
+                height={28}
+              />
             )}
           </button>
         </div>
       </div>
       <ul
         className={cn(
-          "z-50 fixed top-0 h-full w-full mt-[64px] transition-transform duration-300 sm:mt-[72px] backdrop-blur-sm bg-white bg-opacity-50 justify-start flex-col items-center pt-14",
+          "z-50 fixed top-200 w-full h-full transition-all duration-300 backdrop-blur-lg justify-start flex-col items-center pt-0",
+          scrollPosition ? "mt-[48px] sm:mt-[56px]" : "mt-[64px] sm:mt-[72px]",
           isMobile ? "flex translate-x-0" : " -translate-x-full block"
         )}
       >
         <NavLinks
-          className="h-10 bg-opacity-50 py-10 text-gray-800 flex justify-center items-center hover:text-white hover:bg-black hover:bg-opacity-75 cursor-pointer w-full uppercase font-semibold"
+          className={cn(
+            "hover:text-white  hover:bg-black hover:bg-opacity-75 z-50"
+          )}
           setIsMobile={setIsMobile}
         />
       </ul>
@@ -180,24 +268,32 @@ function Navbar({ className }: Props) {
 
 export default Navbar;
 
-const Logo = ({ scrollPosition }: { scrollPosition: number }) => {
+const Logo = ({
+  scrollPosition,
+  className,
+}: {
+  scrollPosition: number;
+  className: string;
+}) => {
   return (
     <Link href="/">
       <div
         className={cn(
-          rubik?.className,
-          "sm:text-4xl text-2xl transition-all tracking-tight uppercase duration-300 flex items-center",
-          "border-4 border-current border-dashed rounded-lg px-2 text-opacity-75 border-opacity-70"
-          // scrollPosition > 0 ? " border-white" : ""
+          // eastSeaDokdo?.className,
+          "sm:text-6xl text-2xl transition-all tracking-tight duration-300 flex items-center",
+          "hover:opacity-75 hover:text-[3.85rem] border-opacity-70 transition-all duration-300",
+          className,
+          "font-east-sea-dokdo"
         )}
       >
-        <span>Trail W</span>
-        {scrollPosition ? (
-          <Hiker className="w-9 h-9 -mx-1 mb-1" />
-        ) : (
-          <Hiker className="w-9 h-9 -mx-1 mb-1 stroke-white" />
-        )}
-        <span>sdom</span>
+        {/* <Image
+          src="/logo-light.png"
+          width={250}
+          height={250}
+          alt="Trail Wisdom Logo"
+          className="hover:opacity-50 transition-all duration-300"
+        /> */}
+        Trail Wisdom.
       </div>
     </Link>
   );

@@ -35,12 +35,18 @@ const LeftSidebar = ({ wrapperClass, post }: Props) => {
       )}
     >
       <TooltipWrapper label="Share to facebook">
-        <FacebookShareButton url={`${siteURL}/posts/${slug.current}`}>
+        <FacebookShareButton
+          url={`${siteURL}/posts/${slug.current}`}
+          className="hover:opacity-50"
+        >
           <FacebookIconWithColor />
         </FacebookShareButton>
       </TooltipWrapper>
       <TooltipWrapper label="Share to Twitter">
-        <TwitterShareButton url={`${siteURL}/posts/${slug.current}`}>
+        <TwitterShareButton
+          url={`${siteURL}/posts/${slug.current}`}
+          className="hover:opacity-50"
+        >
           <TwitterIconWithColor />
         </TwitterShareButton>
       </TooltipWrapper>
@@ -48,12 +54,16 @@ const LeftSidebar = ({ wrapperClass, post }: Props) => {
         <PinterestShareButton
           url={`${siteURL}/posts/${slug.current}`}
           media={mainImage?.asset?.url}
+          className="hover:opacity-50"
         >
           <PinterestIcon className="rounded-md w-7 h-7" />
         </PinterestShareButton>
       </TooltipWrapper>
       <TooltipWrapper label="Share via Email">
-        <EmailShareButton url={`${siteURL}/posts/${slug.current}`}>
+        <EmailShareButton
+          url={`${siteURL}/posts/${slug.current}`}
+          className="hover:opacity-50"
+        >
           <EmailIcon className="rounded-md w-7 h-7" />
         </EmailShareButton>
       </TooltipWrapper>

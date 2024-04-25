@@ -20,7 +20,9 @@ const InputIconOverlay = ({ Icon, iconClass, overlayIcon = true }: Props) => {
         height={32}
         className={cn(
           "top-0 left-0 z-10 pl-2",
-          overlayIcon ? "absolute" : "",
+          overlayIcon
+            ? "absolute"
+            : "hover:-translate-y-1 transition-all duration-300",
           iconClass
         )}
       />
