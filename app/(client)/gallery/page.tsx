@@ -21,12 +21,19 @@ async function fetchInstagramData() {
       throw new Error("Failed to fetch Instagram feed");
     }
     const jsonData = await data.json();
+    console.log(jsonData);
 
     return jsonData?.data || [];
   } catch (err: any) {
     console.error("Error fetching Instagram feed:", err.message);
   }
 }
+
+export async function getPhotos() {
+  console.log("placeholder");
+}
+
+export const revalidate = 60;
 
 const GalleryPage = async () => {
   const instagramFeed: InstagramPost[] = await fetchInstagramData();
