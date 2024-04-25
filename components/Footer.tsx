@@ -1,18 +1,16 @@
-import React from "react";
-import ThemeSwitch from "./ThemeSwitch";
+import { siteConfig } from "@/app/constants";
+import { cn } from "@/lib/utils";
 import {
   GitHubLogoIcon,
   HeartFilledIcon,
   InstagramLogoIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
-import { Separator } from "./ui/separator";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import { CoffeeIcon } from "./ui/icons";
+import ThemeSwitch from "./ThemeSwitch";
 import TooltipWrapper from "./TooltipWrapper";
-import { siteConfig } from "@/app/constants";
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
 
 const Footer = () => {
   return (
@@ -36,8 +34,9 @@ const Footer = () => {
                   </a>
                 </Button>
               </TooltipWrapper>
-              <TooltipWrapper label="If you'd like to support me">
-                <Button
+              {/* TODO - need to fix stripe implementation */}
+              {/* <TooltipWrapper label="If you'd like to support me"> */}
+              {/* <Button
                   variant="outline"
                   className="flex justify-start font-semibold px-2 gap-2 w-fit sm:w-[180px] items-center"
                   size="icon"
@@ -50,8 +49,8 @@ const Footer = () => {
                   >
                     Buy Me a Coffee
                   </a>
-                </Button>
-              </TooltipWrapper>
+                </Button> */}
+              {/* </TooltipWrapper> */}
             </div>
             <div className="flex justify-end flex-1 gap-14 items-start">
               <div className="flex flex-col justify-center items-center gap-2">
