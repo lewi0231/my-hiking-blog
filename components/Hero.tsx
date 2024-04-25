@@ -29,9 +29,11 @@ const Hero = ({
         <Image
           width={1000}
           height={1000}
+          fetchPriority="high"
           src={mainImage}
           alt={"Background Image of Man on Hill"}
           className="w-full h-full fixed object-cover left-0 top-0 -z-10"
+          decoding="async"
           priority
         />
         <div
