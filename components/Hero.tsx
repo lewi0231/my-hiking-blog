@@ -34,7 +34,7 @@ const Hero = ({
           fetchPriority="high"
           src={mainImage}
           alt={imageAlt}
-          className="w-full h-full fixed object-cover left-0 top-0 -z-10"
+          className="w-full h-full fixed object-cover left-0 top-0 -z-10 opacity-75"
           decoding="async"
           priority
         />
