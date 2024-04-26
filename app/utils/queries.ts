@@ -19,6 +19,18 @@ export const getAllPostsQuery = () => {
             `;
 };
 
+export const photoFeedQuery = () => {
+  return `*[_type == "photo"]{
+          _id,
+          _createdAt,
+          image{
+            asset->{url},
+            alt,
+            }
+          }
+  `;
+};
+
 export const getPostQuery = (slug: string) => {
   return `*[_type == "post" && slug.current == "${slug}"]{
             title,

@@ -2,17 +2,12 @@
 
 import { inter } from "@/app/utils/fonts";
 import { cn } from "@/lib/utils";
-import {
-  Cross1Icon,
-  GitHubLogoIcon,
-  HamburgerMenuIcon,
-  InstagramLogoIcon,
-  TwitterLogoIcon,
-} from "@radix-ui/react-icons";
+import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SearchModal from "./SearchModal";
+import SocialMediaIcons from "./SocialMediaIcons";
 
 const NavLinks = ({
   className,
@@ -172,38 +167,10 @@ function Navbar({ className }: Props) {
           >
             <div className="flex gap-8 items-center ml-20">
               <div className=" h-full">
-                <ul className="flex gap-4 h-full">
-                  <li className="h-full align-middle">
-                    <InstagramLogoIcon
-                      className="icon-nav"
-                      color={
-                        isDarkBackground && scrollPosition === 0
-                          ? "white"
-                          : "black"
-                      }
-                    />
-                  </li>
-                  <li>
-                    <GitHubLogoIcon
-                      className="icon-nav"
-                      color={
-                        isDarkBackground && scrollPosition === 0
-                          ? "white"
-                          : "black"
-                      }
-                    />
-                  </li>
-                  <li>
-                    <TwitterLogoIcon
-                      className="icon-nav"
-                      color={
-                        isDarkBackground && scrollPosition === 0
-                          ? "white"
-                          : "black"
-                      }
-                    />
-                  </li>
-                </ul>
+                <SocialMediaIcons
+                  scrollPosition={scrollPosition}
+                  isDarkBackground={isDarkBackground}
+                />
               </div>
               <SearchModal position={scrollPosition} />
             </div>

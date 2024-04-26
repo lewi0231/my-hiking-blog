@@ -24,6 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script async src="/Ads.txt" crossOrigin="anonymous"></script>
+      <meta
+        name="google-adsense-account"
+        content="ca-pub-9861112713684008"
+      ></meta>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased relative",

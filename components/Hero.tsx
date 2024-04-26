@@ -48,7 +48,7 @@ const Hero = ({
           <h1 className={cn(" text-4xl", " font-east-sea-dokdo")}>{title}</h1>
           <h5
             className={cn(
-              "text-4xl font-light tracking-normal font-raleway uppercase"
+              "text-4xl font-medium tracking-normal font-raleway uppercase"
             )}
           >
             {subtitle}
