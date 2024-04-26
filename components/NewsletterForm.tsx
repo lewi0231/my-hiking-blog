@@ -50,7 +50,7 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
   return (
     <section className={cn(" p-4", className)}>
       <div className="space-y-4">
-        {label && <h2 className="text-2xl font-semibold pb-2">{label}</h2>}
+        {label && <h2 className="text-2xl font-medium pb-2">{label}</h2>}
         <Formik
           initialValues={{
             name: "",

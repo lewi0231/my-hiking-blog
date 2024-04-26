@@ -21,6 +21,7 @@ const BlogPage = async () => {
         mainImage={"/star_gazing.jpeg"}
         subtitle="Blog."
         textPosition="bottom-left"
+        imageAlt="Blog image"
       />
 
       <div className=" bg-gradient-to-r via-gray-300 to-gray-100 from-white py-20">

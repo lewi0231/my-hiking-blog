@@ -12,6 +12,7 @@ const AboutPage = () => {
         mainImage={"/about_image.jpg"}
         subtitle="About."
         textPosition="bottom-left"
+        imageAlt="Path along the ocean"
       />
       {/* <section className="min-h-screen bg-gray-100 flex"> */}
       {/* <Header title="Blog Posts" /> */}

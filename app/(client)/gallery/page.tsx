@@ -25,11 +25,12 @@ const GalleryPage = async () => {
   const photoFeed: Photo[] = await getPhotos();
 
   return (
-    <main>
+    <article>
       <Hero
         mainImage={"/path.jpg"}
         subtitle="Photos."
         textPosition="bottom-left"
+        imageAlt="Starry night framed by trees"
       />
       {photoFeed && (
         <section className="w-full flex flex-col justify-center items-center px-14 bg-gradient-to-l to-gray-200 from-gray-50 h-full py-12">
@@ -48,7 +49,7 @@ const GalleryPage = async () => {
           </div>
         </section>
       )}
-    </main>
+    </article>
   );
 };
 
