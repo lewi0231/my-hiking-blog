@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import React from "react";
 
 const Contact = () => {
   return (
@@ -8,6 +7,7 @@ const Contact = () => {
         mainImage="/contact_image.jpg"
         title="Contact"
         textPosition="bottom-left"
+        imageAlt=""
       />
     </article>
   );

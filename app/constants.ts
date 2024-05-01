@@ -12,6 +12,7 @@ export const siteConfig = {
   socialMedia: {
     github: "https://github.com/lewi0231",
     pinterest: "https://www.pinterest.com.au/trailwisdomblog/",
+    twitter: "https://twitter.com/trailwisdom___",
     instagram: "https://www.instagram.com/trailwisdomblog/",
   },
   mainImages: {

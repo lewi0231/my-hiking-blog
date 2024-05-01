@@ -13,6 +13,7 @@ type Props = {
   subtitle?: string;
   textClass?: string;
   tags?: Tag[];
+  imageAlt: string;
 };
 
 const Hero = ({
@@ -22,6 +23,7 @@ const Hero = ({
   textPosition = "center",
   textClass,
   tags,
+  imageAlt,
 }: Props) => {
   return (
     <section className="relative h-[100vh]">
@@ -29,9 +31,11 @@ const Hero = ({
         <Image
           width={1000}
           height={1000}
+          fetchPriority="high"
           src={mainImage}
-          alt={"Background Image of Man on Hill"}
-          className="w-full h-full fixed object-cover left-0 top-0 -z-10"
+          alt={imageAlt}
+          className="w-full h-full fixed object-cover left-0 top-0 -z-10 opacity-75"
+          decoding="async"
           priority
         />
         <div
@@ -46,7 +50,7 @@ const Hero = ({
           <h1 className={cn(" text-4xl", " font-east-sea-dokdo")}>{title}</h1>
           <h5
             className={cn(
-              "text-4xl font-light tracking-normal font-raleway uppercase"
+              "text-4xl font-medium tracking-normal font-raleway uppercase"
             )}
           >
             {subtitle}

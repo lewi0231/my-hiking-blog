@@ -10,6 +10,17 @@ export interface Post {
   _id: string;
 }
 
+export type Photo = {
+  _id: string;
+  _createdAt: string;
+  image: {
+    asset: {
+      url: string;
+      alt: string;
+    };
+  };
+};
+
 export interface Tag {
   name: string;
   slug: { current: string };

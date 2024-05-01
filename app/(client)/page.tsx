@@ -24,6 +24,7 @@ export default async function Home() {
         mainImage={siteConfig.mainImages.homeImage}
         title={siteConfig.siteTitle}
         subtitle={siteConfig.siteSubtitle}
+        imageAlt="Man on a hill"
       />
       <div className="bg-white">
         <section className=" bg-gradient-to-r from-white  to-gray-200 flex flex-col justify-center items-center gap-2 py-20 font-raleway">

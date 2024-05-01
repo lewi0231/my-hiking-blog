@@ -80,10 +80,12 @@ const PostPage = async ({ params }: Params) => {
         <meta name="twitter:image" content={post?.mainImage?.asset?.url} />
       </head>
       <article>
+        {/* TODO - fix up the alt text in studio */}
         <Hero
           mainImage={post.mainImage.asset.url}
           subtitle={post?.title}
           tags={post?.tags}
+          imageAlt={post?.title}
         />
         <div className=" bg-gray-100 w-full py-10 px-2 sm:px-6 flex flex-col justify-center items-center h-full">
           <div className="flex gap-5 justify-center w-full sm:max-w-6xl h-full">

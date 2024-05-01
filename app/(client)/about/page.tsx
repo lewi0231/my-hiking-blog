@@ -1,7 +1,7 @@
 import { siteConfig } from "@/app/constants";
 import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
-import { Mountain } from "lucide-react";
+import { HandIcon } from "lucide-react";
 
 const AboutPage = () => {
   const image = siteConfig.pageImages.about;
@@ -12,6 +12,7 @@ const AboutPage = () => {
         mainImage={"/about_image.jpg"}
         subtitle="About."
         textPosition="bottom-left"
+        imageAlt="Path along the ocean"
       />
       {/* <section className="min-h-screen bg-gray-100 flex"> */}
       {/* <Header title="Blog Posts" /> */}
@@ -63,10 +64,8 @@ const AboutPage = () => {
       <section className="bg-white h-full">
         <div className=" w-full max-w-[90vw] h-full m-auto px-20 py-24">
           <div className="m-auto w-2/3 space-y-6">
-            <h2 className="uppercase text-3xl font-medium">
-              About Trail Wisdom.
-            </h2>
-            <div className="space-y-4 pt-2 text-gray-800 mr-12 leading-loose">
+            <h2 className=" text-4xl font-semibold">About.</h2>
+            <div className="space-y-4 pt-2 text-gray-800 mr-12 leading-loose pb-4 font-medium">
               <p>
                 Trail Wisdom attempts, perhaps ambitiously, to document or
                 capture the wisdom of the trail.{" "}
@@ -86,34 +85,32 @@ const AboutPage = () => {
               </p>
               <p>
                 On a personal note, Trail Wisdom has come about in response to
-                my difficulties with mental health. After reaching my limit, in
-                terms of stress and general and how often I have observed (in
-                myself and others) the therapeutic value of being in nature. how
-                the simple act of being in nature and choosing to go on
-                adventures that take us out of our comfort zone for a while, can
-                be hugely therapeutic.
+                my difficulties with mental health and my love of nature.
+                Viewing hiking and nature as a bit of antitode to the stresses
+                of the modern world.
               </p>
               <p>
-                As a result of explored many career paths, and it just so
-                happens I am now a software developer. Thus, I give you this
-                blog.
+                My time on earth has been a rather restless one, with my
+                exploring a number of career paths, and it just so happens I am
+                now a software developer. Thus, I give you this blog.
               </p>
-
               <p>
                 If you have interests that you believe fit with the above and
-                are interested in contributing please get in touch.
+                are interested in contributing or collaborating please get in
+                touch.
               </p>
-              <p>⊂(◉‿◉)つ </p>
             </div>
             <div>
               <Button
                 size="lg"
-                className="flex gap-2 uppercase text-xl tracking-widest rounded-xl w-fit"
+                className="flex gap-2 text-xl tracking-widest rounded-2xl w-fit"
                 asChild
               >
-                <a href="mailto:trailwisdom_blog@gmail.com">
-                  <Mountain />
-                  <span>Say Hi!</span>
+                <a href="mailto:trailwisdom_blog@gmail.com?subject=Hi&body=Hi%20Paul,">
+                  <span className="flex gap-4">
+                    <HandIcon />
+                    Say Hi!
+                  </span>
                 </a>
               </Button>
             </div>

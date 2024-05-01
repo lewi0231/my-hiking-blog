@@ -1,18 +1,13 @@
-import React from "react";
-import ThemeSwitch from "./ThemeSwitch";
-import {
-  GitHubLogoIcon,
-  HeartFilledIcon,
-  InstagramLogoIcon,
-  TwitterLogoIcon,
-} from "@radix-ui/react-icons";
-import { Separator } from "./ui/separator";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import { CoffeeIcon } from "./ui/icons";
-import TooltipWrapper from "./TooltipWrapper";
 import { siteConfig } from "@/app/constants";
+import { cn } from "@/lib/utils";
+import { HeartFilledIcon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
+import Link from "next/link";
+import SocialMediaIcons from "./SocialMediaIcons";
+import ThemeSwitch from "./ThemeSwitch";
+import TooltipWrapper from "./TooltipWrapper";
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
 
 const Footer = () => {
   return (
@@ -36,8 +31,9 @@ const Footer = () => {
                   </a>
                 </Button>
               </TooltipWrapper>
-              <TooltipWrapper label="If you'd like to support me">
-                <Button
+              {/* TODO - need to fix stripe implementation */}
+              {/* <TooltipWrapper label="If you'd like to support me"> */}
+              {/* <Button
                   variant="outline"
                   className="flex justify-start font-semibold px-2 gap-2 w-fit sm:w-[180px] items-center"
                   size="icon"
@@ -50,26 +46,48 @@ const Footer = () => {
                   >
                     Buy Me a Coffee
                   </a>
-                </Button>
-              </TooltipWrapper>
+                </Button> */}
+              {/* </TooltipWrapper> */}
             </div>
-            <div className="flex justify-end flex-1 gap-14 items-start">
-              <div className="flex flex-col justify-center items-center gap-2">
-                <h2 className="text-2xl font-semibold">Services</h2>
-                <ul className="flex flex-col gap-1 items-center">
-                  <li>Website </li>
-                  <li>stuff again</li>
-                  <li>more stuff</li>
+            <div className="flex justify-end flex-1 gap-20 items-start">
+              <FooterBlock title="Get in touch">
+                <ul className="flex flex-col gap-3 items-center">
+                  <li className="hover:underline">
+                    <TooltipWrapper label="Would you like to contribute content?">
+                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20am%20Interested%20in%20Contributing&body=Hi%20Paul,%0D%0A">
+                        Contribute
+                      </a>
+                    </TooltipWrapper>
+                  </li>
+                  <li className="hover:underline">
+                    <TooltipWrapper label="Are you looking to collaborate in some way?">
+                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20am%20Interested%20in%20Collaborating&body=Hi%20Paul,%0D%0A">
+                        Colaboration
+                      </a>
+                    </TooltipWrapper>
+                  </li>
+                  <li className="hover:underline">
+                    <TooltipWrapper label="Looking for a web developer or undertaking a project together?">
+                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20Need%20a%20Web%20Developer&body=Hi%20Paul,%0D%0A">
+                        Web Development
+                      </a>
+                    </TooltipWrapper>
+                  </li>
                 </ul>
-              </div>
-              <div className="flex flex-col gap-2 text-gray-800">
-                <h2 className="text-2xl font-semibold">About</h2>
-                <ul className="flex flex-col gap-1">
-                  <li>stuff</li>
-                  <li>stuff again</li>
-                  <li>more stuff</li>
+              </FooterBlock>
+              <FooterBlock title="Navigation">
+                <ul className="flex flex-col gap-3 items-end w-full">
+                  <li className="hover:underline">
+                    <Link href="/blog">Blog</Link>
+                  </li>
+                  <li className="hover:underline">
+                    <Link href="/about">About</Link>
+                  </li>
+                  <li className="hover:underline">
+                    <Link href="/gallery">Photos</Link>
+                  </li>
                 </ul>
-              </div>
+              </FooterBlock>
             </div>
           </div>
         </div>
@@ -79,13 +97,7 @@ const Footer = () => {
           reserved.
           <div className={cn(" flex justify-between items-center gap-10")}>
             <div className="flex gap-5">
-              <InstagramLogoIcon
-                width={20}
-                height={20}
-                className={styles.icon}
-              />
-              <GitHubLogoIcon width={20} height={20} className={styles.icon} />
-              <TwitterLogoIcon width={20} height={20} className={styles.icon} />
+              <SocialMediaIcons />
             </div>
 
             {siteConfig.featureToggles.darkMode ? (
@@ -103,3 +115,18 @@ export default Footer;
 const styles = {
   icon: "text-black hover:opacity-50 cursor-pointer hover:-translate-y-2 transition-all duration-300",
 };
+
+function FooterBlock({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="flex flex-col justify-center items-center gap-4">
+      <h2 className="text-2xl font-medium">{title}</h2>
+      {children}
+    </div>
+  );
+}
