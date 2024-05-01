@@ -12,10 +12,11 @@ import { Separator } from "./ui/separator";
 const Footer = () => {
   return (
     <div className="w-full bg-gray-200 h-fit">
-      <div className="m-auto max-w-[90vw]">
+      <div className="m-auto max-w-[90vw] w-full md:w-[90vw]">
         <div className="flex justify-between px-14 pt-10 pb-4 items-center text-right">
-          <div className="space-y-4 flex justify-between lg:items-center items-end h-full w-full gap-4">
-            <div className="flex flex-shrink lg:flex-row flex-col flex-1 justify-start gap-10">
+          <div className="space-y-4 flex md:flex-row flex-col justify-between lg:items-center h-full w-full gap-4">
+            {/* <div className="flex flex-shrink lg:flex-row flex-col flex-1 justify-center gap-10"> */}
+            <FooterBlock wrapperClass="py-4">
               <TooltipWrapper label="Support this great organisation!">
                 <Button
                   className="flex justify-start font-semibold gap-2 px-2 w-fit items-center sm:w-[180px]"
@@ -31,9 +32,10 @@ const Footer = () => {
                   </a>
                 </Button>
               </TooltipWrapper>
-              {/* TODO - need to fix stripe implementation */}
-              {/* <TooltipWrapper label="If you'd like to support me"> */}
-              {/* <Button
+            </FooterBlock>
+            {/* TODO - need to fix stripe implementation */}
+            {/* <TooltipWrapper label="If you'd like to support me"> */}
+            {/* <Button
                   variant="outline"
                   className="flex justify-start font-semibold px-2 gap-2 w-fit sm:w-[180px] items-center"
                   size="icon"
@@ -47,9 +49,9 @@ const Footer = () => {
                     Buy Me a Coffee
                   </a>
                 </Button> */}
-              {/* </TooltipWrapper> */}
-            </div>
-            <div className="flex justify-end flex-1 gap-20 items-start">
+            {/* </TooltipWrapper> */}
+            {/* </div> */}
+            <div className="flex flex-col md:flex-row md:justify-end flex-1 md:gap-20 gap-10">
               <FooterBlock title="Get in touch">
                 <ul className="flex flex-col gap-3 items-center">
                   <li className="hover:underline">
@@ -76,7 +78,7 @@ const Footer = () => {
                 </ul>
               </FooterBlock>
               <FooterBlock title="Navigation">
-                <ul className="flex flex-col gap-3 items-end w-full">
+                <ul className="flex flex-col gap-3 items-center md:items-end w-full">
                   <li className="hover:underline">
                     <Link href="/blog">Blog</Link>
                   </li>
@@ -92,7 +94,7 @@ const Footer = () => {
           </div>
         </div>
         <Separator className="mb-6" />
-        <div className="flex justify-between px-14 pb-6 w-full text-gray-700">
+        <div className="flex justify-between px-14 pb-6 w-full text-xs sm:text-sm text-gray-700">
           © {format(new Date(), "yyyy")} {siteConfig.siteTitle}. All rights
           reserved.
           <div className={cn(" flex justify-between items-center gap-10")}>
@@ -119,13 +121,20 @@ const styles = {
 function FooterBlock({
   children,
   title,
+  wrapperClass,
 }: {
   children: React.ReactNode;
-  title: string;
+  title?: string;
+  wrapperClass?: string;
 }) {
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
-      <h2 className="text-2xl font-medium">{title}</h2>
+    <div
+      className={cn(
+        "flex flex-col justify-center items-center gap-4",
+        wrapperClass
+      )}
+    >
+      {title && <h2 className="text-2xl font-medium">{title}</h2>}
       {children}
     </div>
   );

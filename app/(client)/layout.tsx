@@ -1,7 +1,8 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import React from "react";
 import { siteConfig } from "../constants";
 import { eastSeaDokdo, karla, raleway } from "../utils/fonts";
 import { Provider } from "../utils/provider";
@@ -37,11 +38,13 @@ export default function RootLayout({
         )}
       >
         <main className="font-raleway">
-          <Navbar className="fixed top-0 left-0" />
-          <Provider>
-            {children}
-            <Footer />
-          </Provider>
+          <React.StrictMode>
+            <Navbar className="fixed top-0 left-0" />
+            <Provider>
+              {children}
+              <Footer />
+            </Provider>
+          </React.StrictMode>
         </main>
       </body>
     </html>

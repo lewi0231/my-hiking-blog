@@ -2,31 +2,54 @@
 
 import { useForm } from "react-hook-form";
 
+import { Post } from "@/app/utils/Interface";
+import { createComment } from "@/lib/actions";
+import { CommentSchemaType } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { CommentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Session } from "next-auth";
+import { useState, useTransition } from "react";
+import { FormError } from "./form-error";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Textarea } from "./ui/textarea";
 
-const schema = z.object({
-  postId: z.string(),
-  comment: z.string(),
-  user: z.string(),
-  parentComment: z.string(),
-});
+type Props = { post: Post; session: Session | null };
 
-type Props = {
-  postId: string;
-};
+const CommentForm = ({ post, session }: Props) => {
+  // const { post, session } = usePostContext() ?? {};
 
-const CommentForm = ({ postId }: Props) => {
-  const form = useForm<z.output<typeof schema>>({
-    resolver: zodResolver(schema),
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+
+  const form = useForm<CommentSchemaType>({
+    resolver: zodResolver(CommentSchema),
+    defaultValues: {
+      comment: "",
+      postId: post._id,
+      userName: session?.user?.name ?? "",
+      userEmail: session?.user?.email ?? "",
+    },
   });
 
-  async function onSubmit(data: z.output<typeof schema>) {
-    console.log(data);
-  }
+  const onSubmit = (values: CommentSchemaType) => {
+    console.log(values);
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      createComment(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
+
+    if (success) {
+      form.reset();
+    }
+  };
 
   return (
     <Form {...form}>
@@ -40,13 +63,19 @@ const CommentForm = ({ postId }: Props) => {
           render={({ field }) => (
             <FormItem className="flex-1">
               <FormControl>
-                <Textarea placeholder="Your comment..." {...field} />
+                <Textarea placeholder="Your comment..." {...field} autoFocus />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button size="lg" type="submit" className="py-5">
-          Submit
+        <FormError message={error} />
+        <Button
+          size="lg"
+          type="submit"
+          className={cn("py-5 h-full", isPending ? "opacity-70" : "")}
+          disabled={isPending}
+        >
+          {isPending ? "Loading" : "Post"}
         </Button>
       </form>
     </Form>

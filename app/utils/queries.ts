@@ -33,6 +33,7 @@ export const photoFeedQuery = () => {
 
 export const getPostQuery = (slug: string) => {
   return `*[_type == "post" && slug.current == "${slug}"]{
+            _id,
             title,
             slug,
             body,
@@ -45,6 +46,12 @@ export const getPostQuery = (slug: string) => {
                   asset->{
                     url
                   }
+                },
+                bio[]{
+                  _type,
+                  children[]{
+                    text
+                  }
                 }
             },
             tags[]->{
@@ -55,6 +62,26 @@ export const getPostQuery = (slug: string) => {
              mainImage{
                 asset->{
                     url
+                }
+            },
+            comments[]->{
+              message,
+                _id,
+                _updatedAt,
+                created,
+                likes[]->{
+                  _id
+                },
+                parentComment->{
+                  _id
+                },
+                children[]->{
+                  _id
+                },
+                user->{
+                  _id,
+                  name,
+                  email
                 }
             }
 
@@ -96,5 +123,11 @@ export const getPostsByTagQuery = (tag: string) => {
         }
 
     }
+  `;
+};
+
+export const getUserIfExistsQuery = (email: string) => {
+  return `
+    *[_type == "user" && email.current == "${email}"]
   `;
 };

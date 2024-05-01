@@ -4,15 +4,6 @@ import Hero from "@/components/Hero";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 
-type InstagramPost = {
-  id: string;
-  caption: string;
-  media_url: string;
-  media_type: string;
-  timestamp: string;
-  permalink: string;
-};
-
 async function getPhotos() {
   const query = photoFeedQuery();
   const data: Photo[] = await client.fetch(query);

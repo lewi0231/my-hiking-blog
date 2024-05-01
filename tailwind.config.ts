@@ -2,8 +2,15 @@ import type { Config } from "tailwindcss";
 
 import { fontFamily } from "tailwindcss/defaultTheme";
 
+// TODO - look into JIT mode and advanced tailwind use.
 const config = {
   darkMode: ["class"],
+  // mode: "jit",
+  // purge: [
+  //   "./public/**/*.html",
+  //   "./components/**/*.{ts,tsx}",
+  //   "./app/**/*.{ts,tsx}",
+  // ],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",

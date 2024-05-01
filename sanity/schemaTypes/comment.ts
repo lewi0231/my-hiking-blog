@@ -6,9 +6,15 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "content",
-      title: "Content",
+      name: "message",
+      title: "Message",
       type: "text",
+    }),
+    defineField({
+      name: "created",
+      title: "Created At",
+      type: "datetime",
+      initialValue: new Date().toISOString(),
     }),
     defineField({
       name: "user",
@@ -27,6 +33,18 @@ export default defineType({
       title: "Parent Comment",
       type: "reference",
       to: [{ type: "comment" }],
+    }),
+    defineField({
+      name: "children",
+      title: "Child Comments",
+      type: "array",
+      of: [{ type: "reference", to: { type: "comment" } }],
+    }),
+    defineField({
+      name: "likes",
+      title: "Likes",
+      type: "array",
+      of: [{ type: "reference", to: { type: "like" } }],
     }),
   ],
 });

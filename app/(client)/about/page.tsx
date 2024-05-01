@@ -62,10 +62,10 @@ const AboutPage = () => {
       </section> */}
       {/* <Separator color="#000000" className="bg-white h-full" /> */}
       <section className="bg-white h-full">
-        <div className=" w-full max-w-[90vw] h-full m-auto px-20 py-24">
-          <div className="m-auto w-2/3 space-y-6">
+        <div className=" w-full max-w-[90vw] h-full m-auto px-4 md:px-20 py-24">
+          <div className="m-auto w-full md:w-[600px] space-y-6">
             <h2 className=" text-4xl font-semibold">About.</h2>
-            <div className="space-y-4 pt-2 text-gray-800 mr-12 leading-loose pb-4 font-medium">
+            <div className="space-y-4 pt-2 text-gray-800 mr-12 leading-loose pb-4 font-medium w-full">
               <p>
                 Trail Wisdom attempts, perhaps ambitiously, to document or
                 capture the wisdom of the trail.{" "}
