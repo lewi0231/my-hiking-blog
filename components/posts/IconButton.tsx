@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { Button } from "../ui/button";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   isActive?: boolean;
   color?: string;
   children?: React.ReactNode;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const IconButton = ({
   Icon,
@@ -25,7 +25,7 @@ const IconButton = ({
       {...props}
     >
       <span className={`${children != null ? "mr-1" : ""}`}>
-        <Icon color={color} size={16} />
+        <Icon color={isActive ? "red" : color} size={16} strokeWidth={4} />
       </span>
       {children}
     </Button>

@@ -1,9 +1,10 @@
 import { siteConfig } from "@/app/constants";
-import { Post } from "@/app/utils/Interface";
+
 import { getPostQuery } from "@/app/utils/queries";
 import { auth } from "@/auth";
 import Hero from "@/components/Hero";
 import { PostContextProvider } from "@/context/PostContextProvider";
+import { Post } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";

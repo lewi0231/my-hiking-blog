@@ -1,12 +1,13 @@
 "use client";
 
 import { siteConfig } from "@/app/constants";
-import { Post } from "@/app/utils/Interface";
+
 import TooltipWrapper from "@/components/TooltipWrapper";
 import {
   FacebookIconWithColor,
   TwitterIconWithColor,
 } from "@/components/ui/icons";
+import { Post } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 import {

@@ -1,14 +1,13 @@
-import { type Comment as CommentType } from "@/app/utils/Interface";
-
+import { CommentComposite } from "@/lib/types";
 import Comment from "./Comment";
 
 type Props = {
-  comments: CommentType[];
+  comments: CommentComposite[];
 };
 
 const CommentList = ({ comments }: Props) => {
   return comments.map((comment) => (
-    <div key={comment._id} className="h-full ">
+    <div key={comment?._id || comment?._createdAt} className="space-y-4">
       <Comment comment={comment} />
     </div>
   ));

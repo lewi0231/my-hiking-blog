@@ -2,7 +2,7 @@ export const getAllPostsQuery = () => {
   return ` *[_type == "post"]{
                 title,
                 slug,
-                publishedAt,
+                _createdAt,
                 excerpt,
                 _id,
                 tags[]-> {
@@ -37,7 +37,7 @@ export const getPostQuery = (slug: string) => {
             title,
             slug,
             body,
-            publishedAt,
+            _createdAt,
             excerpt,
             author->{
                 _id,
@@ -68,7 +68,7 @@ export const getPostQuery = (slug: string) => {
               message,
                 _id,
                 _updatedAt,
-                created,
+                _createdAt,
                 likes[]->{
                   _id
                 },
@@ -82,6 +82,9 @@ export const getPostQuery = (slug: string) => {
                   _id,
                   name,
                   email
+                },
+                post{
+                  _ref
                 }
             }
 
@@ -106,7 +109,7 @@ export const getPostsByTagQuery = (tag: string) => {
         title,
         slug,
         body,
-        publishedAt,
+        _createdAt,
         author->{
             _id,
             name,

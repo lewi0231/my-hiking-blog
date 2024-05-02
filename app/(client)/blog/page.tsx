@@ -1,7 +1,7 @@
-import { Post } from "@/app/utils/Interface";
 import { getAllPostsQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
 import PostListComponent from "@/components/PostListComponent";
+import { Post } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 
 async function getAllPosts() {

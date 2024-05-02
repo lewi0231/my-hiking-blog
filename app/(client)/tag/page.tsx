@@ -1,9 +1,9 @@
 import { client } from "@/sanity/lib/client";
-import React from "react";
-import { Tag } from "@/app/utils/Interface";
-import Link from "next/link";
-import Header from "@/components/Header";
+
 import { getAllTagsQuery } from "@/app/utils/queries";
+import Header from "@/components/Header";
+import { Tag } from "@/lib/types";
+import Link from "next/link";
 
 const getAllTags = async () => {
   const query = getAllTagsQuery();

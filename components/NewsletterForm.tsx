@@ -70,7 +70,7 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
   };
 
   return (
-    <section className={cn(" p-4", className)}>
+    <section className={cn("p-4", className)}>
       <div className="space-y-4">
         {label && <h2 className="text-2xl font-medium pb-2">{label}</h2>}
 
@@ -89,6 +89,7 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
                         placeholder="Joe"
                         type="text"
                         disabled={isPending}
+                        className="bg-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -107,6 +108,7 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
                         placeholder="johnDoe@example.com"
                         type="email"
                         disabled={isPending}
+                        className="bg-white"
                       />
                     </FormControl>
                     <FormMessage />

@@ -1,5 +1,5 @@
 import { raleway } from "@/app/utils/fonts";
-import { Post } from "@/app/utils/Interface";
+import { Post } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

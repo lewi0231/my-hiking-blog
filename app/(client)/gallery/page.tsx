@@ -1,6 +1,6 @@
-import { Photo } from "@/app/utils/Interface";
 import { photoFeedQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
+import { Photo } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 

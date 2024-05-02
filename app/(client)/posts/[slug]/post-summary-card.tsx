@@ -34,7 +34,7 @@ const PostSummaryCard = () => {
         </span>
         <span className=" text-gray-600">|</span>
         <span className="font-semibold text-gray-800">
-          {format(parseISO(post?.publishedAt ?? ""), "do MMMM yyyy")}
+          {format(parseISO(post?._createdAt ?? ""), "do MMMM yyyy")}
         </span>
       </p>
     </div>

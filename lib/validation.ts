@@ -19,9 +19,10 @@ export const SubscribeSchema = z.object({
 });
 
 export const CommentSchema = z.object({
-  postId: z.string(),
-  comment: z.string(),
-  userName: z.string(),
+  postId: z.string().min(1, { message: "Please try again later!" }),
+  comment: z.string().min(1, { message: "Comment is required!" }),
+  userName: z.string().min(1, { message: "Make sure you've signed in!" }),
   userEmail: z.string().email(),
-  //   parentComment: z.string(),
+  parentId: z.string().or(z.null()),
+  commentId: z.string().min(1),
 });

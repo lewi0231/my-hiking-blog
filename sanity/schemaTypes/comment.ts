@@ -11,12 +11,6 @@ export default defineType({
       type: "text",
     }),
     defineField({
-      name: "created",
-      title: "Created At",
-      type: "datetime",
-      initialValue: new Date().toISOString(),
-    }),
-    defineField({
       name: "user",
       title: "User",
       type: "reference",

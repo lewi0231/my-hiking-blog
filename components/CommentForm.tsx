@@ -2,42 +2,47 @@
 
 import { useForm } from "react-hook-form";
 
-import { Post } from "@/app/utils/Interface";
+import { usePostContext } from "@/context/PostContext";
 import { createComment } from "@/lib/actions";
 import { CommentSchemaType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CommentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Session } from "next-auth";
 import { useState, useTransition } from "react";
 import { FormError } from "./form-error";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Textarea } from "./ui/textarea";
 
-type Props = { post: Post; session: Session | null };
+type Props = { autoFocus?: boolean; parentId?: string | null };
 
-const CommentForm = ({ post, session }: Props) => {
-  // const { post, session } = usePostContext() ?? {};
+const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
+  const { createLocalComment, session, postId } = usePostContext();
 
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
+  const newCommentId = crypto.randomUUID();
+
   const form = useForm<CommentSchemaType>({
     resolver: zodResolver(CommentSchema),
     defaultValues: {
+      commentId: newCommentId,
       comment: "",
-      postId: post._id,
+      postId,
       userName: session?.user?.name ?? "",
       userEmail: session?.user?.email ?? "",
+      parentId: parentId || null,
     },
   });
 
   const onSubmit = (values: CommentSchemaType) => {
-    console.log(values);
     setError("");
     setSuccess("");
+
+    createLocalComment(values);
+    form.reset();
 
     startTransition(() => {
       createComment(values).then((data) => {
@@ -45,37 +50,52 @@ const CommentForm = ({ post, session }: Props) => {
         setSuccess(data.success);
       });
     });
-
-    if (success) {
-      form.reset();
-    }
   };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full gap-4 mb-10 items-center"
+        className="flex w-full gap-4 my-4 items-center"
       >
-        <FormField
-          control={form.control}
-          name="comment"
-          render={({ field }) => (
-            <FormItem className="flex-1">
-              <FormControl>
-                <Textarea placeholder="Your comment..." {...field} autoFocus />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormError message={error} />
+        <div className="w-full space-y-2">
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormControl>
+                  <Textarea
+                    placeholder="Your comment..."
+                    {...field}
+                    autoFocus={autoFocus}
+                    className=""
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormError message={error} />
+        </div>
         <Button
           size="lg"
           type="submit"
-          className={cn("py-5 h-full", isPending ? "opacity-70" : "")}
-          disabled={isPending}
+          className={cn(
+            "py-5 h-full",
+            isPending || !session?.user?.email ? "opacity-70" : ""
+          )}
+          disabled={isPending || !session?.user?.email}
+          onClick={() => {
+            console.log("Submitting comment form values", form.getValues());
+
+            const validationState =
+              form.getFieldState("comment").error?.message;
+            if (validationState) {
+              setError(validationState);
+            }
+          }}
         >
-          {isPending ? "Loading" : "Post"}
+          {isPending ? "Posting" : "Post"}
         </Button>
       </form>
     </Form>

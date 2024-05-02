@@ -27,7 +27,6 @@ export async function createComment(values: CommentSchemaType) {
   const validatedFields = CommentSchema.safeParse(values);
 
   if (!validatedFields.success) {
-    console.log(validatedFields.error);
     return { error: "Invalid comment" };
   }
 
@@ -47,7 +46,10 @@ export async function createComment(values: CommentSchemaType) {
     userId = newUser._id;
   }
 
+  console.debug("User id for new comment: ", userId);
+
   const comment = await client.create({
+    _id: values.commentId,
     _type: "comment",
     user: {
       _type: "reference",
@@ -62,11 +64,40 @@ export async function createComment(values: CommentSchemaType) {
 
   if (!comment) return { error: "Problem creating comment!" };
 
-  await client
+  console.debug("Comment id for new comment", comment._id);
+
+  if (values.parentId) {
+    const parentComment = await client
+      .patch(values.parentId)
+      .setIfMissing({ children: [] })
+      .append("children", [{ _type: "reference", _ref: comment._id }])
+      .commit();
+
+    console.debug("Comment id added to parent comment", parentComment._id);
+
+    const commentPatch = await client
+      .patch(comment._id)
+      .set({ parentComment: { _type: "reference", _ref: values.parentId } })
+      .commit();
+
+    console.debug("Comment now has a parentId", values.parentId);
+  }
+
+  const userPatch = await client
+    .patch(userId)
+    .setIfMissing({ comments: [] })
+    .append("comments", [{ _type: "reference", _ref: comment._id }])
+    .commit();
+
+  console.debug("Comment id added to user", userId);
+
+  const postPatch = await client
     .patch(values.postId)
     .setIfMissing({ comments: [] })
     .append("comments", [{ _type: "reference", _ref: comment._id }])
     .commit();
+
+  console.debug("Post id for new comment", postPatch._id);
 
   return { success: "Comment created!" };
 }

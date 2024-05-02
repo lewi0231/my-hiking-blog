@@ -1,15 +1,16 @@
 "use client";
 
-import { Post } from "@/app/utils/Interface";
 import { Social } from "@/components/auth/social";
 import CommentForm from "@/components/CommentForm";
 import CommentList from "@/components/posts/CommentList";
+import TooltipWrapper from "@/components/TooltipWrapper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { usePostContext } from "@/context/PostContext";
+import { Post } from "@/lib/types";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
@@ -24,10 +25,10 @@ const PostContent = () => {
   const { post, rootComments, session } = usePostContext();
 
   return (
-    <section className=" pt-14 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
+    <section className=" pt-6 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
       <PostSummaryCard />
-      <Separator className="mt-10" />
-      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:mt-10 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:my-4 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl">
+      <Separator className="mt-6" />
+      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl ">
         <PortableText
           value={post?.body}
           components={myPortableTextComponents}
@@ -36,19 +37,23 @@ const PostContent = () => {
       <Separator className="my-4" />
       <div>
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl uppercase py-10 font-semibold">Comments</h1>
+          <h1 className="text-2xl uppercase py-4 font-semibold">Comments</h1>
           {session ? (
-            <Avatar className=" shadow-sm">
-              <AvatarImage src={session.user?.image ?? undefined} />{" "}
-              <AvatarFallback>{session.user?.name?.charAt(0)}</AvatarFallback>
-            </Avatar>
+            <TooltipWrapper
+              label={`You're commenting as ${session.user?.name}`}
+            >
+              <Avatar className=" shadow-sm">
+                <AvatarImage src={session.user?.image ?? undefined} />{" "}
+                <AvatarFallback>{session.user?.name?.charAt(0)}</AvatarFallback>
+              </Avatar>
+            </TooltipWrapper>
           ) : (
             <OAuthModal />
           )}
         </div>
-        <CommentForm session={session} post={post} />
+        <CommentForm />
         {rootComments != null && rootComments.length > 0 && (
-          <div className="my-6 space-y-2">
+          <div className="my-6 ">
             <CommentList comments={rootComments} />
           </div>
         )}
@@ -93,7 +98,7 @@ const myPortableTextComponents = {
   },
   block: {
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-purple-500 pl-4 italic tracking-wider bg-purple-100">
+      <blockquote className="border-l-4 border-purple-500 pl-4 my-2 italic tracking-wider bg-purple-100">
         {children}
       </blockquote>
     ),

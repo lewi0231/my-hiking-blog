@@ -50,12 +50,6 @@ export default defineType({
       of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
-      name: "publishedAt",
-      title: "Published at",
-      type: "datetime",
-      initialValue: () => new Date().toISOString(),
-    }),
-    defineField({
       name: "body",
       title: "Body",
       type: "blockContent",

@@ -1,44 +1,63 @@
-import { type Comment } from "@/app/utils/Interface";
 import { usePostContext } from "@/context/PostContext";
+import { CommentComposite } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { format, parseISO } from "date-fns";
-import { EditIcon, HeartIcon, LucideReply, Trash } from "lucide-react";
+import { LucideReply } from "lucide-react";
 import { useState } from "react";
+import CommentForm from "../CommentForm";
+import TooltipWrapper from "../TooltipWrapper";
 import { Button } from "../ui/button";
 import CommentList from "./CommentList";
 import IconButton from "./IconButton";
 
 type Props = {
-  comment: Comment;
+  comment: CommentComposite;
 };
 
 const Comment = ({ comment }: Props) => {
-  const { user, created, children, message } = comment;
+  const { user, _createdAt: created, children, message } = comment;
   const { getReplies } = usePostContext();
   const childComments = getReplies(comment._id);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
 
   return (
     <div className="">
-      <div className="border-2 rounded-md border-gray-200 py-2 px-4">
-        <div className="flex justify-between font-semibold opacity-70 text-blue-950 text-muted-foreground items-center">
-          <span className="text-lg">{user.name}</span>
-          <span className="text-sm opacity-70">
+      <div className="shadow-sm shadow-gray-200 border border-input rounded-md py-1 px-4 bg-gray-40">
+        <div className="flex justify-between font-semibold text-gray-700 items-center">
+          <span className="text-sm">{user.name}</span>
+          <span className="text-xs opacity-85 font-light">
             {format(parseISO(created), "PPpp")}
           </span>
         </div>
-        <div className="pl-4 py-2 text-sm font-light tracking-wide">
+        <div className="pl-4 pt-1 pb-[2px] text-sm font-light tracking-wide">
           {message}
         </div>
         <div className="flex justify-start gap-4">
-          <IconButton Icon={HeartIcon} aria-label="like">
+          {/* <IconButton Icon={HeartIcon} aria-label="like">
             2
-          </IconButton>
-          <IconButton Icon={LucideReply} aria-label="reply" />
-          <IconButton Icon={EditIcon} aria-label="edit" />
-          <IconButton Icon={Trash} aria-label="delete" color="red" />
+          </IconButton> */}
+          <TooltipWrapper label="Reply to this post!">
+            <IconButton
+              Icon={LucideReply}
+              aria-label={isReplying ? "Cancel Reply" : "reply"}
+              onClick={() => setIsReplying((prev) => !prev)}
+              isActive={isReplying}
+            />
+          </TooltipWrapper>
+          {/* <IconButton Icon={EditIcon} aria-label="edit" />
+          <IconButton Icon={Trash} aria-label="delete" color="red" /> */}
         </div>
       </div>
+      {isReplying && (
+        <div>
+          <CommentForm
+            key={comment?._id}
+            autoFocus
+            parentId={comment?._id || null}
+          />
+        </div>
+      )}
       {childComments?.length > 0 && (
         <>
           <div
@@ -46,17 +65,17 @@ const Comment = ({ comment }: Props) => {
             // hidden={areChildrenHidden ? true : false}
           >
             <button
-              className="w-[15px] p-0 cursor-pointer relative before:absolute before:w-[2px] before:bg-black before:inset-0"
+              className="w-[15px] p-0 cursor-pointer relative before:absolute before:w-[1px] before:bg-purple-950 :before:bg-opacity-50 before:inset-0"
               aria-label="Hide Replies"
               onClick={() => setAreChildrenHidden(true)}
             />
-            <div className=" pl-4 flex-grow">
+            <div className=" pl-4 flex-grow space-y-2 mb-2">
               <CommentList comments={childComments} />
             </div>
           </div>
           <Button
             className={cn(
-              "mt-1 bg-blue-500/90 hover:bg-blue-500 duration-300",
+              "my-2  duration-300 py-0",
               areChildrenHidden ? "" : "hidden"
             )}
             onClick={() => setAreChildrenHidden(false)}
