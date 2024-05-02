@@ -4,7 +4,9 @@ import PostListComponent from "@/components/PostListComponent";
 import { client } from "@/sanity/lib/client";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { siteConfig } from "../constants";
-import { Post } from "../utils/Interface";
+
+import { Post } from "@/lib/types";
+import Image from "next/image";
 import { getAllPostsQuery } from "../utils/queries";
 
 async function getAllPosts() {
@@ -43,10 +45,18 @@ export default async function Home() {
           )}
         </section>
 
-        <section className="bg-gray-300">
+        <section className="bg-gray-300 flex h-fit">
           <NewsletterForm
             columnInputs={false}
-            className="w-[85vw] m-auto py-12"
+            className="w-1/2 m-auto py-12 px-10"
+          />
+          <Image
+            width={500}
+            height={500}
+            src={"/star_gazing.jpeg"}
+            alt={"Image of the stars"}
+            className="rounded-md w-1/2"
+            priority
           />
         </section>
       </div>

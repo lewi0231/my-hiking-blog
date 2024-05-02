@@ -1,17 +1,8 @@
-import { Photo } from "@/app/utils/Interface";
 import { photoFeedQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
+import { Photo } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-
-type InstagramPost = {
-  id: string;
-  caption: string;
-  media_url: string;
-  media_type: string;
-  timestamp: string;
-  permalink: string;
-};
 
 async function getPhotos() {
   const query = photoFeedQuery();

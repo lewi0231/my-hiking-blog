@@ -6,8 +6,8 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "content",
-      title: "Content",
+      name: "message",
+      title: "Message",
       type: "text",
     }),
     defineField({
@@ -27,6 +27,18 @@ export default defineType({
       title: "Parent Comment",
       type: "reference",
       to: [{ type: "comment" }],
+    }),
+    defineField({
+      name: "children",
+      title: "Child Comments",
+      type: "array",
+      of: [{ type: "reference", to: { type: "comment" } }],
+    }),
+    defineField({
+      name: "likes",
+      title: "Likes",
+      type: "array",
+      of: [{ type: "reference", to: { type: "like" } }],
     }),
   ],
 });

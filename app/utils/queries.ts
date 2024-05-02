@@ -2,7 +2,7 @@ export const getAllPostsQuery = () => {
   return ` *[_type == "post"]{
                 title,
                 slug,
-                publishedAt,
+                _createdAt,
                 excerpt,
                 _id,
                 tags[]-> {
@@ -33,10 +33,11 @@ export const photoFeedQuery = () => {
 
 export const getPostQuery = (slug: string) => {
   return `*[_type == "post" && slug.current == "${slug}"]{
+            _id,
             title,
             slug,
             body,
-            publishedAt,
+            _createdAt,
             excerpt,
             author->{
                 _id,
@@ -44,6 +45,12 @@ export const getPostQuery = (slug: string) => {
                 image{
                   asset->{
                     url
+                  }
+                },
+                bio[]{
+                  _type,
+                  children[]{
+                    text
                   }
                 }
             },
@@ -55,6 +62,29 @@ export const getPostQuery = (slug: string) => {
              mainImage{
                 asset->{
                     url
+                }
+            },
+            comments[]->{
+              message,
+                _id,
+                _updatedAt,
+                _createdAt,
+                likes[]->{
+                  _id
+                },
+                parentComment->{
+                  _id
+                },
+                children[]->{
+                  _id
+                },
+                user->{
+                  _id,
+                  name,
+                  email
+                },
+                post{
+                  _ref
                 }
             }
 
@@ -79,7 +109,7 @@ export const getPostsByTagQuery = (tag: string) => {
         title,
         slug,
         body,
-        publishedAt,
+        _createdAt,
         author->{
             _id,
             name,
@@ -96,5 +126,11 @@ export const getPostsByTagQuery = (tag: string) => {
         }
 
     }
+  `;
+};
+
+export const getUserIfExistsQuery = (email: string) => {
+  return `
+    *[_type == "user" && email.current == "${email}"]
   `;
 };

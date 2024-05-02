@@ -4,6 +4,7 @@ import { inter } from "@/app/utils/fonts";
 import { cn } from "@/lib/utils";
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+// @ts-ignore
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SearchModal from "./SearchModal";
@@ -68,7 +69,7 @@ const NavLinks = ({
         <Link
           href="/about"
           className={cn(
-            "w-full text-3xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
             "lg:text-xl lg:hover:text-[1rem]",
             className
           )}

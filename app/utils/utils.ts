@@ -1,4 +1,4 @@
-import { Post } from "./Interface";
+import { Post } from "@/lib/types";
 
 export const filterPostsByText = (posts: Post[], text: string) => {
   return posts

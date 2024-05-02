@@ -1,16 +1,26 @@
 "use client";
 
-import { Field, Form, Formik, FormikHelpers } from "formik";
-import { CalendarHeart } from "lucide-react";
+// import { Form } from "formik";
 import { Button } from "./ui/button";
 
-import {
-  newsletterSchema,
-  NewsletterSchema,
-} from "@/app/utils/validation-helper";
+import { subscribe } from "@/lib/actions";
+import { SubscribeSchemaType } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { Dialog, DialogContent } from "./ui/dialog";
+import { SubscribeSchema } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { FormError } from "./form-error";
+import { FormSuccess } from "./form-success";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { Input } from "./ui/input";
 
 type Props = {
   className?: string;
@@ -19,39 +29,102 @@ type Props = {
 };
 
 const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
-  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>("");
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const form = useForm<SubscribeSchemaType>({
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+    resolver: zodResolver(SubscribeSchema),
+  });
 
-  const handleSubmit = async (
-    values: NewsletterSchema,
-    { resetForm }: FormikHelpers<NewsletterSchema>
-  ) => {
-    try {
-      const response = await fetch("/api/newsletter", {
-        method: "POST",
-        body: JSON.stringify({ ...values }),
-      });
+  const onSubmit = async (values: SubscribeSchemaType) => {
+    setError("");
+    setSuccess("");
 
-      const data = await response.json();
-
-      if (data.error) {
+    startTransition(async () => {
+      subscribe(values).then((data) => {
         setError(data.error);
-      } else {
-        setModalIsOpen(true);
+        setSuccess(data.success);
+      });
+      // const response = await fetch("/api/newsletter", {
+      //   method: "POST",
+      //   body: JSON.stringify({ ...values }),
+      // });
 
-        // Reset form values after successful submission
-        resetForm();
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-    }
+      // const data = await response.json();
+
+      // if (data.error) {
+      //   setError(data.error);
+      // } else {
+      //   setModalIsOpen(true);
+
+      //   // Reset form values after successful submission
+      //   resetForm();
+      // }
+    });
   };
 
   return (
-    <section className={cn(" p-4", className)}>
+    <section className={cn("p-4", className)}>
       <div className="space-y-4">
         {label && <h2 className="text-2xl font-medium pb-2">{label}</h2>}
-        <Formik
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Joe"
+                        type="text"
+                        disabled={isPending}
+                        className="bg-white"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="johnDoe@example.com"
+                        type="email"
+                        disabled={isPending}
+                        className="bg-white"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+            <Button type="submit" className="w-full" disabled={isPending}>
+              Subscribe
+            </Button>
+          </form>
+        </Form>
+
+        {/* <Formik
           initialValues={{
             name: "",
             email: "",
@@ -106,7 +179,7 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
             <CalendarHeart />
             Congratulations, you&apos;ve successfully signed up.
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </div>
     </section>
   );

@@ -6,9 +6,15 @@ type Props = {
   wrapperClass: string;
   authorImage: string;
   authorName: string;
+  authorBio: string;
 };
 
-const RightSidebar = ({ wrapperClass, authorImage, authorName }: Props) => {
+const RightSidebar = ({
+  wrapperClass,
+  authorImage,
+  authorName,
+  authorBio,
+}: Props) => {
   return (
     <aside className={cn("relative w-full space-y-4", wrapperClass)}>
       <section className=" bg-gray-50 rounded-md shadow-md p-4">
@@ -16,12 +22,12 @@ const RightSidebar = ({ wrapperClass, authorImage, authorName }: Props) => {
         <div className="flex gap-5 items-center">
           <Avatar>
             <AvatarImage src={authorImage} alt={authorName} />
-            <AvatarFallback>PRL</AvatarFallback>
+            <AvatarFallback>{authorName?.charAt(0) ?? ""}</AvatarFallback>
           </Avatar>
           <span>{authorName}</span>
         </div>
         <div className="mt-4">
-          <p>Site developer and nature enthusiast</p>
+          <p>{authorBio}</p>
         </div>
       </section>
       <NewsletterForm

@@ -1,5 +1,5 @@
 import { raleway } from "@/app/utils/fonts";
-import { Post } from "@/app/utils/Interface";
+import { Post } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,7 +42,7 @@ const PostCard = ({ post, imageClassName }: Props) => {
             {post.excerpt}
           </p>
           <div className="py-2 gap-2 inline-flex">
-            {post?.tags.map((tag) => (
+            {post?.tags?.map((tag) => (
               <Badge
                 variant="secondary"
                 className="px-1 text-xs hover:shadow-md hover:opacity-75"

@@ -1,9 +1,10 @@
-import { defineField, defineType, type Rule } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "post",
   title: "Post",
   type: "document",
+  options: {},
   fields: [
     defineField({
       name: "title",
@@ -49,12 +50,6 @@ export default defineType({
       of: [{ type: "reference", to: { type: "category" } }],
     }),
     defineField({
-      name: "publishedAt",
-      title: "Published at",
-      type: "datetime",
-      initialValue: () => new Date().toISOString(),
-    }),
-    defineField({
       name: "body",
       title: "Body",
       type: "blockContent",
@@ -76,6 +71,21 @@ export default defineType({
           to: [
             {
               type: "tag",
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "comments",
+      title: "Comments",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [
+            {
+              type: "comment",
             },
           ],
         },

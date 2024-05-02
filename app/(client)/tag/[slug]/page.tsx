@@ -1,7 +1,7 @@
-import { Post } from "@/app/utils/Interface";
 import { getPostsByTagQuery } from "@/app/utils/queries";
 import Header from "@/components/Header";
 import PostListComponent from "@/components/PostListComponent";
+import { Post } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 
 type Params = {

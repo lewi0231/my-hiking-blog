@@ -1,4 +1,17 @@
 import { defineField, defineType } from "sanity";
+import { client } from "../lib/client";
+
+const isUniqueEmail = async (email: string | undefined) => {
+  const params = {
+    email,
+  };
+
+  const numExistingUsers = await client
+    .fetch('count(*[_type == "user" && email == $email])', params)
+    .then((response) => response.json());
+
+  return numExistingUsers === 0;
+};
 
 export default defineType({
   name: "user",
@@ -9,6 +22,11 @@ export default defineType({
       name: "name",
       title: "Name",
       type: "string",
+    }),
+    defineField({
+      name: "email",
+      title: "Email",
+      type: "email",
     }),
     defineField({
       name: "likes",

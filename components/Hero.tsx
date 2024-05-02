@@ -1,6 +1,6 @@
 "use client";
 
-import { Tag } from "@/app/utils/Interface";
+import { Tag } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +34,7 @@ const Hero = ({
           fetchPriority="high"
           src={mainImage}
           alt={imageAlt}
-          className="w-full h-full fixed object-cover left-0 top-0 -z-10"
+          className="w-full h-full fixed object-cover left-0 top-0 -z-10 opacity-85"
           decoding="async"
           priority
         />
