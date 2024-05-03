@@ -70,15 +70,12 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
   };
 
   return (
-    <section className={cn("p-4", className)}>
+    <section className={cn(className, "p-4")}>
       <div className="space-y-4">
         {label && <h2 className="text-2xl font-medium pb-2">{label}</h2>}
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 max-w-[400px] m-auto"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
               <FormField
                 control={form.control}

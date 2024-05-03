@@ -46,10 +46,13 @@ export default async function Home() {
         </section>
 
         <section className="bg-gray-300 flex h-fit">
-          <NewsletterForm
-            columnInputs={false}
-            className="w-3/4 sm:w-1/2 m-auto py-12 px-10"
-          />
+          <div className="w-3/4 sm:w-1/2 py-12 px-10 max-w-[400px] m-auto">
+            <NewsletterForm
+              columnInputs={false}
+              label="Stay up to date"
+              className="uppercase"
+            />
+          </div>
           <Image
             width={500}
             height={500}

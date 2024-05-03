@@ -70,11 +70,11 @@ const OAuthModal = () => {
         <Button>Log in to comment</Button>
       </DialogTrigger>
       <DialogContent>
-        <Card>
-          <CardHeader>
-            <CardTitle className=" text-2xl pb-2">Login to Comment</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <Card className="w-full font-karla">
+          <CardContent className="w-2/3 m-auto">
+            <CardHeader>
+              <CardTitle className=" text-2xl pb-2">Login to Comment</CardTitle>
+            </CardHeader>
             <Social />
           </CardContent>
         </Card>
