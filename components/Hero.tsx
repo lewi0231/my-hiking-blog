@@ -40,10 +40,10 @@ const Hero = ({
         />
         <div
           className={cn(
-            "absolute text-white text-center",
+            "absolute text-white text-center bottom-1/4 left-1/2 -translate-x-1/2",
             textPosition === "center"
-              ? "bottom-1/4 left-1/2 -translate-x-1/2 "
-              : " bottom-[100px] left-[120px] ",
+              ? ""
+              : " sm:bottom-[100px] sm:left-[120px] ",
             textClass
           )}
         >

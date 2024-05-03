@@ -23,7 +23,7 @@ const NavLinks = ({
         <Link
           href="/"
           className={cn(
-            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50  flex justify-center items-center cursor-pointer  py-10 lg:py-0",
             "lg:text-xl ",
             className
           )}
@@ -38,7 +38,7 @@ const NavLinks = ({
         <Link
           href="/blog"
           className={cn(
-            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer py-10 lg:py-0",
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50  flex justify-center items-center cursor-pointer py-10 lg:py-0",
             "lg:text-xl lg:hover:text-[1rem]",
             className
           )}
@@ -54,7 +54,7 @@ const NavLinks = ({
         <Link
           href="/gallery"
           className={cn(
-            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer   py-10 lg:py-0",
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 flex justify-center items-center cursor-pointer   py-10 lg:py-0",
             "lg:text-xl lg:hover:text-[1rem]",
             className
           )}
@@ -69,7 +69,7 @@ const NavLinks = ({
         <Link
           href="/about"
           className={cn(
-            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50 text-gray-800 flex justify-center items-center cursor-pointer  py-10 lg:py-0",
+            "w-full text-2xl h-full transition-all duration-300 bg-opacity-50  flex justify-center items-center cursor-pointer  py-10 lg:py-0",
             "lg:text-xl lg:hover:text-[1rem]",
             className
           )}
@@ -203,12 +203,12 @@ function Navbar({ className }: Props) {
                 width={28}
                 height={28}
                 className=""
-                color={isDarkBackground ? "white" : "black"}
+                color={isDarkBackground && !scrollPosition ? "white" : "black"}
                 onClick={(e) => {}}
               />
             ) : (
               <HamburgerMenuIcon
-                color={isDarkBackground ? "white" : "black"}
+                color={isDarkBackground && !scrollPosition ? "white" : "black"}
                 width={28}
                 height={28}
               />
@@ -218,8 +218,8 @@ function Navbar({ className }: Props) {
       </div>
       <ul
         className={cn(
-          "z-50 fixed top-200 w-full h-full transition-all duration-300 backdrop-blur-lg justify-start flex-col items-center pt-0",
-          scrollPosition ? "mt-[48px] sm:mt-[56px]" : "mt-[64px] sm:mt-[72px]",
+          "z-50 fixed top-200 w-full h-full transition-all duration-300 backdrop-blur-sm backdrop-brightness-125 justify-start flex-col items-center pt-0",
+          scrollPosition ? "mt-[48px] sm:mt-[76px]" : "mt-[64px] sm:mt-[92px]",
           isMobile ? "flex translate-x-0" : " -translate-x-full block"
         )}
       >

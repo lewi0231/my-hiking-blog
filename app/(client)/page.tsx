@@ -35,8 +35,8 @@ export default async function Home() {
             Recent Posts
           </h1>
 
-          <p className="text-xl pb-10">
-            Recent adventures / thoughts / reviews / how to&apos;s
+          <p className="text-xl pb-10 px-8 text-center">
+            Recent adventures, wellbeing-tips and reviews.
           </p>
           {posts?.length > 0 ? (
             <PostListComponent posts={posts.slice(0, 3)} />
