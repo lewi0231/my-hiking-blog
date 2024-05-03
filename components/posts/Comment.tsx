@@ -1,11 +1,10 @@
 import { usePostContext } from "@/context/PostContext";
 import { CommentComposite } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { format, parseISO } from "date-fns";
-import { LucideReply } from "lucide-react";
+import { formatDistanceToNow, parseISO } from "date-fns";
+import { Dot, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import CommentForm from "../CommentForm";
-import TooltipWrapper from "../TooltipWrapper";
 import { Button } from "../ui/button";
 import CommentList from "./CommentList";
 import IconButton from "./IconButton";
@@ -23,28 +22,31 @@ const Comment = ({ comment }: Props) => {
 
   return (
     <div className="">
-      <div className="shadow-sm shadow-gray-200 border border-input rounded-md py-1 px-4 bg-gray-40">
-        <div className="flex justify-between font-semibold text-gray-700 items-center">
-          <span className="text-sm">{user.name}</span>
+      <div className="shadow-sm shadow-gray-200 border border-input rounded-md py-1 px-4 bg-gray-100">
+        <div className="flex justify-start gap-4 items-center shadow-sm">
+          <span className="text-sm font-extrabold">{user.name}</span>
+          <Dot />
           <span className="text-xs opacity-85 font-light">
-            {format(parseISO(created), "PPpp")}
+            {formatDistanceToNow(parseISO(created)) + " ago"}
           </span>
         </div>
-        <div className="pl-4 pt-1 pb-[2px] text-sm font-light tracking-wide">
+        <div className="pt-4 pb-2 text-sm font-light tracking-wide">
           {message}
         </div>
         <div className="flex justify-start gap-4">
           {/* <IconButton Icon={HeartIcon} aria-label="like">
             2
           </IconButton> */}
-          <TooltipWrapper label="Reply to this post!">
-            <IconButton
-              Icon={LucideReply}
-              aria-label={isReplying ? "Cancel Reply" : "reply"}
-              onClick={() => setIsReplying((prev) => !prev)}
-              isActive={isReplying}
-            />
-          </TooltipWrapper>
+
+          <IconButton
+            Icon={MessageSquare}
+            aria-label={isReplying ? "Cancel Reply" : "reply"}
+            onClick={() => setIsReplying((prev) => !prev)}
+            isActive={isReplying}
+            color="blue"
+            iconLabel="Reply"
+          />
+
           {/* <IconButton Icon={EditIcon} aria-label="edit" />
           <IconButton Icon={Trash} aria-label="delete" color="red" /> */}
         </div>

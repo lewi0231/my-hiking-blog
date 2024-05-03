@@ -36,7 +36,7 @@ export default async function Home() {
           </h1>
 
           <p className="text-xl pb-10">
-            My recent adventures and associated thoughts / learnings
+            Recent adventures / thoughts / reviews / how to&apos;s
           </p>
           {posts?.length > 0 ? (
             <PostListComponent posts={posts.slice(0, 3)} />
@@ -55,7 +55,7 @@ export default async function Home() {
             height={500}
             src={"/star_gazing.jpeg"}
             alt={"Image of the stars"}
-            className="rounded-md w-1/2"
+            className="w-1/2"
             priority
           />
         </section>

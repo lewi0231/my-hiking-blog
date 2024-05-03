@@ -4,7 +4,6 @@ import { HeartFilledIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import Link from "next/link";
 import SocialMediaIcons from "./SocialMediaIcons";
-import ThemeSwitch from "./ThemeSwitch";
 import TooltipWrapper from "./TooltipWrapper";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
@@ -102,9 +101,9 @@ const Footer = () => {
               <SocialMediaIcons />
             </div>
 
-            {siteConfig.featureToggles.darkMode ? (
+            {/* {siteConfig.featureToggles.darkMode ? (
               <ThemeSwitch className={styles.icon} />
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </div>

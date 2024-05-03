@@ -28,7 +28,7 @@ const PostContent = () => {
     <section className=" pt-6 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
       <PostSummaryCard />
       <Separator className="mt-6" />
-      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl ">
+      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl prose-headings:font-karla prose-img:w-2/3 prose-img:m-auto">
         <PortableText
           value={post?.body}
           components={myPortableTextComponents}
@@ -72,9 +72,7 @@ const OAuthModal = () => {
       <DialogContent>
         <Card>
           <CardHeader>
-            <CardTitle className="font-raleway text-2xl pb-2">
-              Login to Comment
-            </CardTitle>
+            <CardTitle className=" text-2xl pb-2">Login to Comment</CardTitle>
           </CardHeader>
           <CardContent>
             <Social />
@@ -85,6 +83,7 @@ const OAuthModal = () => {
   );
 };
 
+// TODO - need to extract this into it's own component so that it can be used elsewhere (e.g., for bio)
 const myPortableTextComponents = {
   types: {
     image: ({ value }: any) => (

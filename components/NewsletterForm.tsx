@@ -75,7 +75,10 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
         {label && <h2 className="text-2xl font-medium pb-2">{label}</h2>}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 max-w-[400px] m-auto"
+          >
             <div className="space-y-4">
               <FormField
                 control={form.control}

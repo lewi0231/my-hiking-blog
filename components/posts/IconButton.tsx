@@ -8,6 +8,7 @@ type Props = {
   isActive?: boolean;
   color?: string;
   children?: React.ReactNode;
+  iconLabel?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const IconButton = ({
@@ -15,20 +16,30 @@ const IconButton = ({
   isActive,
   color = "#2e2d88",
   children,
+  iconLabel,
   ...props
 }: Props) => {
   return (
-    <Button
-      size="icon"
-      variant="ghost"
-      className={cn(isActive ? "" : "", "flex justify-center items-center")}
-      {...props}
-    >
-      <span className={`${children != null ? "mr-1" : ""}`}>
-        <Icon color={isActive ? "red" : color} size={16} strokeWidth={4} />
-      </span>
-      {children}
-    </Button>
+    <div className="flex items-center">
+      <Button
+        size="icon"
+        variant="ghost"
+        className={cn(
+          isActive ? "" : "",
+          "flex justify-center items-center w-fit px-2 rounded-full hover:text-white -ml-2",
+          isActive ? "hover:bg-red-500" : `hover:bg-purple-500`
+        )}
+        {...props}
+      >
+        <span className={`${children != null ? "mr-1" : ""} flex items-center`}>
+          <Icon size={16} strokeWidth={2} />
+        </span>
+        {children}
+      </Button>
+      <div className="font-medium tracking-tight text-sm capitalize">
+        {iconLabel}
+      </div>
+    </div>
   );
 };
 

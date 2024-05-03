@@ -32,6 +32,7 @@ const config = {
         "east-sea-dokdo": "var(--east-sea-dokdo)",
         karla: "var(--karla)",
         raleway: "var(--raleway)",
+        inter: "var(--inter)",
       },
       "sidebar-card": "",
       colors: {
