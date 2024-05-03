@@ -25,16 +25,16 @@ const SearchResultPage = async ({ searchParams }: Params) => {
   const posts = await getSearchResults(query);
 
   return (
-    <main>
-      <div className=" bg-white">
-        <Header title="Search Results" />
-        {posts?.length > 0 ? (
-          <PostListComponent posts={posts} />
-        ) : (
-          "No posts at the moment, :'("
-        )}
-      </div>
-    </main>
+    <div className=" bg-white h-screen">
+      <Header title="Search Results" />
+      {posts?.length > 0 ? (
+        <PostListComponent posts={posts} />
+      ) : (
+        <div className="px-20 text-xl text-center pb-20">
+          No posts found matching that search.
+        </div>
+      )}
+    </div>
   );
 };
 
