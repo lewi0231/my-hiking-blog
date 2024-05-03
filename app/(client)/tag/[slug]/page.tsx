@@ -24,7 +24,7 @@ const TagDetailsPage = async ({ params }: Params) => {
   const posts: Post[] = await getPostsByTag(params.slug);
 
   return (
-    <div className=" bg-gradient-to-r to-slate-50 from-stone-200">
+    <div className=" bg-gradient-to-r to-slate-50 from-stone-200 pb-10">
       <Header title={`#${params?.slug}`} />
       <div>{posts?.length > 0 ? <PostListComponent posts={posts} /> : ""}</div>
     </div>
