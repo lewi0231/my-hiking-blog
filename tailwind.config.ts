@@ -4,7 +4,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 // TODO - look into JIT mode and advanced tailwind use.
 const config = {
-  darkMode: ["class"],
+  // darkMode: ["class"],
   // mode: "jit",
   // purge: [
   //   "./public/**/*.html",

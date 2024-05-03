@@ -37,9 +37,9 @@ export type Photo = {
   _id: string;
   _createdAt: string;
   image: {
+    alt: string;
     asset: {
       url: string;
-      alt: string;
     };
   };
 };

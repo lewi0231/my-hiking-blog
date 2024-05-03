@@ -93,7 +93,7 @@ const Footer = () => {
           </div>
         </div>
         <Separator className="mb-6" />
-        <div className="flex justify-between px-14 pb-6 w-full text-xs sm:text-sm text-gray-700">
+        <div className="flex justify-between px-4 sm:px-14 pb-6 w-full text-xs sm:text-sm text-gray-700">
           © {format(new Date(), "yyyy")} {siteConfig.siteTitle}. All rights
           reserved.
           <div className={cn(" flex justify-between items-center gap-10")}>

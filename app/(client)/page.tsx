@@ -29,7 +29,7 @@ export default async function Home() {
         imageAlt="Man on a hill"
       />
       <div className="bg-white">
-        <section className=" bg-gradient-to-r from-white  to-gray-200 flex flex-col justify-center items-center gap-2 py-20 font-raleway">
+        <section className=" bg-gradient-to-r from-white  to-gray-200 flex flex-col justify-center items-center gap-2 py-20 font-karla">
           <EnvelopeClosedIcon className="w-6 h-6" />
           <h1 className="text-4xl uppercase pt-4 pb-4 font-medium">
             Recent Posts
@@ -48,14 +48,14 @@ export default async function Home() {
         <section className="bg-gray-300 flex h-fit">
           <NewsletterForm
             columnInputs={false}
-            className="w-1/2 m-auto py-12 px-10"
+            className="w-3/4 sm:w-1/2 m-auto py-12 px-10"
           />
           <Image
             width={500}
             height={500}
             src={"/star_gazing.jpeg"}
             alt={"Image of the stars"}
-            className="w-1/2"
+            className="w-1/2 hidden sm:block"
             priority
           />
         </section>

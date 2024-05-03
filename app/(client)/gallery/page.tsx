@@ -1,7 +1,9 @@
 import { photoFeedQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
+import TooltipWrapper from "@/components/TooltipWrapper";
 import { Photo } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
+import { formatDistanceToNow, parseISO } from "date-fns";
 import Image from "next/image";
 
 async function getPhotos() {
@@ -24,18 +26,29 @@ const GalleryPage = async () => {
         imageAlt="Starry night framed by trees"
       />
       {photoFeed && (
-        <section className="w-full flex flex-col justify-center items-center px-14 bg-gradient-to-l to-gray-200 from-gray-50 h-full py-12">
-          <div className="w-full columns-1 sm:columns-4 gap-2 space-y-2">
+        <section className="w-full flex flex-col justify-center items-center px-4 sm:px-8 lg:px-14 bg-gradient-to-l to-gray-200 from-gray-50 h-full py-12">
+          <div className="w-full columns-1 sm:columns-3 md:columns-4 gap-2 space-y-2">
             {photoFeed.map((photo: Photo) => (
-              <Image
+              <TooltipWrapper
+                label={photo?.image?.alt}
                 key={photo._id}
-                src={photo.image.asset.url}
-                alt={photo.image.asset.alt}
-                className="w-full h-full object-cover"
-                width={300}
-                height={300}
-                priority
-              />
+                className="break-inside-avoid"
+              >
+                <a href={photo?.image?.asset?.url} target="_blank">
+                  <Image
+                    src={photo?.image?.asset?.url}
+                    alt={photo?.image?.alt}
+                    className="w-full h-full object-cover"
+                    width={300}
+                    height={300}
+                    priority
+                  />
+                  <p className="text-[10px] text-opacity-50 py-0 tracking-widest">
+                    Posted {formatDistanceToNow(parseISO(photo?._createdAt))}{" "}
+                    ago.
+                  </p>
+                </a>
+              </TooltipWrapper>
             ))}
           </div>
         </section>

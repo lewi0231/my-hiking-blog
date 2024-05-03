@@ -24,9 +24,9 @@ export const photoFeedQuery = () => {
           _id,
           _createdAt,
           image{
-            asset->{url},
             alt,
-            }
+            asset->{ url}
+          }
           }
   `;
 };

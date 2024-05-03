@@ -34,8 +34,8 @@ const PostContent = () => {
           components={myPortableTextComponents}
         />
       </div>
-      <Separator className="my-4" />
-      <div>
+      <Separator className="my-6" />
+      <div className="py-4">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl uppercase py-4 font-semibold">Comments</h1>
           {session ? (

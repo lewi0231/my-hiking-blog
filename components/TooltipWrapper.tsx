@@ -9,18 +9,21 @@ import {
 type Props = {
   children: React.ReactNode;
   label: string;
+  className?: string;
 };
 
-const TooltipWrapper = ({ children, label }: Props) => {
+const TooltipWrapper = ({ children, label, className }: Props) => {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent>
-          <p>{label}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <div className={className}>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>{children}</TooltipTrigger>
+          <TooltipContent>
+            <p>{label}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
   );
 };
 
