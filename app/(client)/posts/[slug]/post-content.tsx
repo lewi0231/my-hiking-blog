@@ -1,10 +1,6 @@
 "use client";
 
 import { Social } from "@/components/auth/social";
-import CommentForm from "@/components/CommentForm";
-import CommentList from "@/components/posts/CommentList";
-import TooltipWrapper from "@/components/TooltipWrapper";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -34,7 +30,7 @@ const PostContent = () => {
           components={myPortableTextComponents}
         />
       </div>
-      <Separator className="my-6" />
+      {/* <Separator className="my-6" />
       <div className="py-4">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl uppercase py-4 font-semibold">Comments</h1>
@@ -56,8 +52,8 @@ const PostContent = () => {
           <div className="my-6 ">
             <CommentList comments={rootComments} />
           </div>
-        )}
-      </div>
+        )} */}
+      {/* </div> */}
     </section>
   );
 };

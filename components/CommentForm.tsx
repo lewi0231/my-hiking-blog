@@ -86,8 +86,6 @@ const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
           )}
           disabled={isPending || !session?.user?.email}
           onClick={() => {
-            console.log("Submitting comment form values", form.getValues());
-
             const validationState =
               form.getFieldState("comment").error?.message;
             if (validationState) {
