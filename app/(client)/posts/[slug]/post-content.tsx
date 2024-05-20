@@ -1,5 +1,9 @@
 "use client";
 
+import AuthModal from "@/components/auth/auth-modal";
+import UserDisplay from "@/components/auth/user-display";
+import CommentForm from "@/components/CommentForm";
+import CommentList from "@/components/posts/CommentList";
 import { Separator } from "@/components/ui/separator";
 import { usePostContext } from "@/context/PostContext";
 import { urlForImage } from "@/sanity/lib/image";
@@ -39,13 +43,13 @@ const PostContent = () => {
     <section className=" pt-6 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
       <PostSummaryCard />
       <Separator className="mt-6" />
-      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl prose-headings:font-karla prose-img:w-3/4 prose-img:m-auto">
+      <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl prose-headings:font-karla prose-img:w-3/4 prose-img:m-auto prose-img:my-2">
         <PortableText
           value={post?.body}
           components={myPortableTextComponents}
         />
       </div>
-      {/* <Separator className="my-6" />
+      <Separator className="my-6" />
       <div className="py-4">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl uppercase py-4 font-semibold">Comments</h1>
@@ -60,8 +64,8 @@ const PostContent = () => {
           <div className="my-6">
             <CommentList comments={rootComments} user={user} />
           </div>
-        )} */}
-      {/* </div> */}
+        )}
+      </div>
     </section>
   );
 };
@@ -70,7 +74,7 @@ const PostContent = () => {
 const myPortableTextComponents = {
   types: {
     image: ({ value }: any) => {
-      console.log("value", value);
+      // TODO - work out why urlForImage is no longer working as it should
       return (
         <Image
           src={urlForImage(value)}
