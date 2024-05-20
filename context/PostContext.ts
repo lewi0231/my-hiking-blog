@@ -1,15 +1,13 @@
 "use client";
 
 import { PostParams } from "@/app/(client)/posts/[slug]/page";
-import { CommentComposite, CommentSchemaType, Post } from "@/lib/types";
-import { Session } from "next-auth";
+import { Comment, CommentSchemaType, Post } from "@/lib/types";
 import { createContext, useContext } from "react";
 
 type Props = {
   post: Post;
-  getReplies: (parentId: string | undefined) => CommentComposite[];
-  rootComments: CommentComposite[];
-  session: Session | null;
+  getReplies: (parentId: string | undefined) => Comment[];
+  rootComments: Comment[];
   createLocalComment: (comment: CommentSchemaType) => void;
   postId: string;
 } & PostParams;

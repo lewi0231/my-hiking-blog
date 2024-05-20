@@ -1,6 +1,7 @@
 "use server";
 
 import { client } from "@/sanity/lib/client";
+import { createClient } from "@/utils/supabase/server";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 import bcrypt from "bcrypt";
 import md5 from "md5";
@@ -26,80 +27,28 @@ mailchimp.setConfig({
 export async function createComment(values: CommentSchemaType) {
   const validatedFields = CommentSchema.safeParse(values);
 
-  if (!validatedFields.success) {
-    return { error: "Invalid comment" };
-  }
+  if (!validatedFields.success) return { error: "Invalid comment" };
 
-  const user = await client.fetch('*[_type == "user" && email == $email]', {
-    email: values.userEmail,
-  });
+  const supabase = createClient();
 
-  let userId;
-  if (user.length > 0) {
-    userId = user[0]._id;
-  } else {
-    const newUser = await client.create({
-      _type: "user",
-      email: values.userEmail,
-      name: values.userName,
-    });
-    userId = newUser._id;
-  }
-
-  console.debug("User id for new comment: ", userId);
-
-  const comment = await client.create({
-    _id: values.commentId,
-    _type: "comment",
-    user: {
-      _type: "reference",
-      _ref: userId,
+  const { data, error } = await supabase.from("comment").insert([
+    {
+      id: values.commentId,
+      parent_id: values.parentId,
+      message: values.message,
+      post_id: values.postId,
+      email: values.email,
+      user_id: values.userId,
     },
-    post: {
-      _type: "reference",
-      _ref: values.postId,
-    },
-    message: values.comment,
-  });
+  ]);
 
-  if (!comment) return { error: "Problem creating comment!" };
+  if (error) {
+    console.error(error);
 
-  console.debug("Comment id for new comment", comment._id);
-
-  if (values.parentId) {
-    const parentComment = await client
-      .patch(values.parentId)
-      .setIfMissing({ children: [] })
-      .append("children", [{ _type: "reference", _ref: comment._id }])
-      .commit();
-
-    console.debug("Comment id added to parent comment", parentComment._id);
-
-    const commentPatch = await client
-      .patch(comment._id)
-      .set({ parentComment: { _type: "reference", _ref: values.parentId } })
-      .commit();
-
-    console.debug("Comment now has a parentId", values.parentId);
+    return { error: "There was a problem creating comment" };
   }
 
-  const userPatch = await client
-    .patch(userId)
-    .setIfMissing({ comments: [] })
-    .append("comments", [{ _type: "reference", _ref: comment._id }])
-    .commit();
-
-  console.debug("Comment id added to user", userId);
-
-  const postPatch = await client
-    .patch(values.postId)
-    .setIfMissing({ comments: [] })
-    .append("comments", [{ _type: "reference", _ref: comment._id }])
-    .commit();
-
-  console.debug("Post id for new comment", postPatch._id);
-
-  return { success: "Comment created!" };
+  return { success: "Comment created!", comment: data };
 }
 
 export async function login(values: LoginSchemaType) {

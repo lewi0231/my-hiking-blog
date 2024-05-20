@@ -21,6 +21,8 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.36.2",
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.43.2",
     "and": "^0.0.3",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",

@@ -1,20 +1,15 @@
 "use client";
 
 import { PostParams } from "@/app/(client)/posts/[slug]/page";
-import {
-  CommentComposite,
-  CommentSchemaType,
-  LocalComment,
-  Post,
-} from "@/lib/types";
-import { Session } from "next-auth";
+import { Comment, CommentSchemaType, Post } from "@/lib/types";
+
 import { useEffect, useMemo, useState } from "react";
 import { PostContext } from "./PostContext";
 
 type Props = {
   value: {
     post: Post;
-    session: Session | null;
+    comments: Comment[];
   } & PostParams;
   children: React.ReactNode;
 };
@@ -22,12 +17,12 @@ type Props = {
 const NO_PARENT_KEY = 0;
 
 export const PostContextProvider = ({ children, value }: Props) => {
-  const [comments, setComments] = useState<CommentComposite[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const commentsByParentId = useMemo(() => {
-    const group: Record<string | number, CommentComposite[]> = {};
+    const group: Record<string | number, Comment[]> = {};
 
     comments.forEach((comment) => {
-      const parentId = comment?.parentComment?._id ?? NO_PARENT_KEY;
+      const parentId = comment?.parent_id ?? NO_PARENT_KEY;
       group[parentId] ||= [];
       group[parentId].push(comment);
     });
@@ -37,26 +32,20 @@ export const PostContextProvider = ({ children, value }: Props) => {
 
   function createLocalComment({
     commentId,
-    comment,
+    message,
     postId,
-    userName,
-    userEmail,
+    email,
     parentId,
+    userId,
   }: CommentSchemaType) {
-    const newLocalComment: LocalComment = {
-      _id: commentId,
-      message: comment,
-      _createdAt: new Date().toISOString(),
-      user: {
-        email: userEmail,
-        name: userName,
-      },
-      post: {
-        _ref: postId,
-      },
-      parentComment: {
-        _id: parentId,
-      },
+    const newLocalComment: Comment = {
+      id: commentId,
+      message,
+      created_at: new Date().toISOString(),
+      user_id: userId,
+      post_id: postId,
+      parent_id: parentId,
+      email,
     };
     setComments((prevComments) => {
       return [newLocalComment, ...prevComments];
@@ -64,9 +53,9 @@ export const PostContextProvider = ({ children, value }: Props) => {
   }
 
   useEffect(() => {
-    if (value?.post?.comments == null) return;
-    setComments(value.post.comments);
-  }, [value?.post?.comments]);
+    if (value?.comments == null) return;
+    setComments(value.comments);
+  }, [value?.comments]);
 
   function getReplies(parentId: string | undefined) {
     if (!parentId) return [];
