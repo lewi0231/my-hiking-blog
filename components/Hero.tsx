@@ -43,14 +43,14 @@ const Hero = ({
             "absolute text-white text-center bottom-1/4 left-1/2 -translate-x-1/2",
             textPosition === "center"
               ? ""
-              : " sm:bottom-[100px] sm:left-[120px] ",
+              : " sm:bottom-[100px] sm:left-[160px] ",
             textClass
           )}
         >
           <h1 className={cn(" text-4xl", " font-east-sea-dokdo")}>{title}</h1>
           <h5
             className={cn(
-              "text-4xl font-medium tracking-normal font-raleway uppercase"
+              "text-4xl font-semibold tracking-normal font-raleway uppercase"
             )}
           >
             {subtitle}

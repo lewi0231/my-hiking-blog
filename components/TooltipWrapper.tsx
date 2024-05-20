@@ -18,7 +18,7 @@ const TooltipWrapper = ({ children, label, className }: Props) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>{children}</TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent className="w-[300px]">
             <p>{label}</p>
           </TooltipContent>
         </Tooltip>

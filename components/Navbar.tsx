@@ -62,7 +62,7 @@ const NavLinks = ({
             if (setIsMobile) setIsMobile(false);
           }}
         >
-          Photos.
+          Gallery.
         </Link>
       </li>
       <li className={cn(" w-full")}>
