@@ -40,7 +40,7 @@ const PostContent = () => {
   }, []);
 
   return (
-    <section className=" pt-6 bg-gray-50 px-10 rounded-md shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
+    <section className=" pt-6 bg-gray-50 px-4 rounded-md sm:px-10 shadow-md flex-shrink-1 flex-grow-0 w-full sm:w-[1000px] min-w-0">
       <PostSummaryCard />
       <Separator className="mt-6" />
       <div className="w-full prose-p:tracking-normal prose-headings:font-bold prose-headings:pt-6 prose-headings:pb-2 prose-headings:uppercase prose-h2:text-3xl m-auto prose-p:py-2 py-6 text-gray-800 text-lg prose-p:text-justify pb-10 prose-li:list-disc prose-li:ml-4 prose-li:py-1 prose-h3:text-2xl prose-h4:text-xl prose-headings:font-karla prose-img:w-3/4 prose-img:m-auto prose-img:my-2">

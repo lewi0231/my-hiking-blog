@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 export const login = async (provider: "github" | "google") => {
   const supabase = createClient();
   const referer = headers().get("referer");
+  console.debug("OAuth to be referred to", referer);
 
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider,
@@ -21,7 +22,7 @@ export const login = async (provider: "github" | "google") => {
   if (error) {
     console.error(error);
   } else {
-    console.log(data?.url);
+    console.debug(data?.url);
     return redirect(data?.url);
   }
 };
