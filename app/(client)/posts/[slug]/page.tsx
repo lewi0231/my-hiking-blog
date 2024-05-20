@@ -3,10 +3,10 @@ import { siteConfig } from "@/app/constants";
 import { getPostQuery } from "@/app/utils/queries";
 import Hero from "@/components/Hero";
 import { PostContextProvider } from "@/context/PostContextProvider";
-import { Post } from "@/lib/types";
+import { Comment, Post } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 import { createClient } from "@/utils/supabase/server";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LeftSidebar from "./left-sidebar";
 import PostContent from "./post-content";
@@ -41,7 +41,15 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post?.title,
       description: post?.excerpt,
-      images: [post?.mainImage?.asset?.url],
+      creator: post?.author?.name,
+      images: [
+        {
+          url: post?.mainImage?.asset?.url,
+          width: 1200,
+          height: 630,
+          alt: "main post image",
+        },
+      ],
     },
   };
 }
@@ -59,14 +67,14 @@ const getComments = async (postId: string) => {
     .from("comment")
     .select("*")
     .eq("post_id", postId);
-  return data;
+  return data as Comment[];
 };
 
 export const revalidate = 60;
 
 const PostPage = async ({ params }: PostParams) => {
   const post: Post = await getPost(params?.slug);
-  const comments = await getComments(post?._id);
+  const comments: Comment[] = await getComments(post?._id);
 
   if (!post) {
     notFound();
@@ -74,21 +82,6 @@ const PostPage = async ({ params }: PostParams) => {
 
   return (
     <>
-      {/* <head>
-        <meta property="og:title" content={post?.title} />
-        <meta property="og:description" content={post?.excerpt} />
-        <meta property="og:image" content={post?.mainImage?.asset?.url} />
-        <meta
-          property="og:url"
-          content={`${siteConfig.siteURL}/posts/${post?.slug.current}`}
-        />
-        <meta property="og:type" content="article" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post?.title} />
-        <meta name="twitter:description" content={post?.excerpt} />
-        <meta name="twitter:image" content={post?.mainImage?.asset?.url} />
-      </head> */}
       <article>
         {/* TODO - fix up the alt text in studio */}
         <Hero
@@ -97,7 +90,6 @@ const PostPage = async ({ params }: PostParams) => {
           tags={post?.tags}
           imageAlt={post?.title}
         />
-
         <div className=" font-karla bg-gray-100 w-full py-10 px-2 sm:px-6 flex flex-col justify-center items-center h-full">
           <div className="flex gap-5 justify-center w-full sm:max-w-6xl h-full">
             <LeftSidebar

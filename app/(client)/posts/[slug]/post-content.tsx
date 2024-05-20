@@ -52,7 +52,7 @@ const PostContent = () => {
       <Separator className="my-6" />
       <div className="py-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl uppercase py-4 font-semibold">Comments</h1>
+          <h2 className="text-2xl uppercase py-4 font-semibold">Comments</h2>
           {user ? (
             <UserDisplay user={user} handleSignOut={handleSignOut} />
           ) : (

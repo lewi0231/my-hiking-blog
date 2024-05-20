@@ -31,9 +31,9 @@ export default async function Home() {
       <div className="bg-white">
         <section className=" bg-gradient-to-r from-white  to-gray-200 flex flex-col justify-center items-center gap-2 py-20 font-karla">
           <EnvelopeClosedIcon className="w-6 h-6" />
-          <h1 className="text-4xl uppercase pt-4 pb-4 font-medium">
+          <h2 className="text-4xl uppercase pt-4 pb-4 font-medium">
             Recent Posts
-          </h1>
+          </h2>
 
           <p className="text-xl pb-10 px-8 text-center">
             Recent adventures, wellbeing-tips and reviews.
