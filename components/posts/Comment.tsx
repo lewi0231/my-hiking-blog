@@ -1,6 +1,7 @@
 import { usePostContext } from "@/context/PostContext";
-import { CommentComposite } from "@/lib/types";
+import { Comment as CommentType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { User } from "@supabase/supabase-js";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Dot, MessageSquare } from "lucide-react";
 import { useState } from "react";
@@ -10,28 +11,33 @@ import CommentList from "./CommentList";
 import IconButton from "./IconButton";
 
 type Props = {
-  comment: CommentComposite;
+  comment: CommentType;
+  user: User | null;
 };
 
-const Comment = ({ comment }: Props) => {
-  const { user, _createdAt: created, children, message } = comment;
+const Comment = ({ comment, user }: Props) => {
+  //   const { user, _createdAt: created, children, message } = comment;
   const { getReplies } = usePostContext();
-  const childComments = getReplies(comment._id);
+  const childComments = getReplies(comment?.id);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
 
+  const distanceToNow = comment?.created_at
+    ? formatDistanceToNow(parseISO(comment?.created_at)) + " ago"
+    : "";
+
   return (
-    <div className="">
-      <div className="shadow-sm shadow-gray-200 border border-input rounded-md py-1 px-4 bg-gray-100">
+    <div className="my-2">
+      <div className="shadow-sm shadow-gray-200 border border-input rounded-md py-1 px-4 bg-gray-50">
         <div className="flex justify-start gap-4 items-center shadow-sm">
-          <span className="text-sm font-extrabold">{user.name}</span>
-          <Dot />
-          <span className="text-xs opacity-85 font-light">
-            {formatDistanceToNow(parseISO(created)) + " ago"}
+          <span className="text-sm font-extrabold">
+            {comment?.email.split("@")[0]}
           </span>
+          <Dot />
+          <span className="text-xs opacity-85 font-light">{distanceToNow}</span>
         </div>
         <div className="pt-4 pb-2 text-sm font-light tracking-wide">
-          {message}
+          {comment?.message}
         </div>
         <div className="flex justify-start gap-4">
           {/* <IconButton Icon={HeartIcon} aria-label="like">
@@ -44,7 +50,7 @@ const Comment = ({ comment }: Props) => {
             onClick={() => setIsReplying((prev) => !prev)}
             isActive={isReplying}
             color="blue"
-            iconLabel="Reply"
+            // iconLabel="Reply"
           />
 
           {/* <IconButton Icon={EditIcon} aria-label="edit" />
@@ -54,16 +60,17 @@ const Comment = ({ comment }: Props) => {
       {isReplying && (
         <div>
           <CommentForm
-            key={comment?._id}
+            key={comment?.id}
             autoFocus
-            parentId={comment?._id || null}
+            parentId={comment?.id || null}
+            user={user}
           />
         </div>
       )}
       {childComments?.length > 0 && (
         <>
           <div
-            className={cn("flex mt-2", areChildrenHidden ? "hidden" : "")}
+            className={cn("flex", areChildrenHidden ? "hidden" : "")}
             // hidden={areChildrenHidden ? true : false}
           >
             <button
@@ -71,8 +78,8 @@ const Comment = ({ comment }: Props) => {
               aria-label="Hide Replies"
               onClick={() => setAreChildrenHidden(true)}
             />
-            <div className=" pl-4 flex-grow space-y-2 mb-2">
-              <CommentList comments={childComments} />
+            <div className=" pl-4 flex-grow">
+              <CommentList comments={childComments} user={user} />
             </div>
           </div>
           <Button

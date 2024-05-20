@@ -1,11 +1,11 @@
 import { siteConfig } from "@/app/constants";
 
 import { getPostQuery } from "@/app/utils/queries";
-import { auth } from "@/auth";
 import Hero from "@/components/Hero";
 import { PostContextProvider } from "@/context/PostContextProvider";
 import { Post } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
+import { createClient } from "@/utils/supabase/server";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LeftSidebar from "./left-sidebar";
@@ -53,11 +53,20 @@ const getPost = async (slug: string) => {
   return post;
 };
 
+const getComments = async (postId: string) => {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("comment")
+    .select("*")
+    .eq("post_id", postId);
+  return data;
+};
+
 export const revalidate = 60;
 
 const PostPage = async ({ params }: PostParams) => {
   const post: Post = await getPost(params?.slug);
-  const session = await auth();
+  const comments = await getComments(post?._id);
 
   if (!post) {
     notFound();
@@ -95,7 +104,9 @@ const PostPage = async ({ params }: PostParams) => {
               wrapperClass="sticky top-24 sm:flex hidden flex-none max-w-12 h-32"
               post={post}
             />
-            <PostContextProvider value={{ post, params, session }}>
+            <PostContextProvider
+              value={{ post, params, comments: comments || [] }}
+            >
               <PostContent />
             </PostContextProvider>
 

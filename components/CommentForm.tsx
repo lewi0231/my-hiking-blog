@@ -8,16 +8,21 @@ import { CommentSchemaType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CommentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { User } from "@supabase/supabase-js";
+import { useEffect, useState, useTransition } from "react";
 import { FormError } from "./form-error";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Textarea } from "./ui/textarea";
 
-type Props = { autoFocus?: boolean; parentId?: string | null };
+type Props = {
+  autoFocus?: boolean;
+  parentId?: string | null;
+  user: User | null;
+};
 
-const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
-  const { createLocalComment, session, postId } = usePostContext();
+const CommentForm = ({ autoFocus = false, parentId = null, user }: Props) => {
+  const { createLocalComment, postId } = usePostContext();
 
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
@@ -29,11 +34,11 @@ const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
     resolver: zodResolver(CommentSchema),
     defaultValues: {
       commentId: newCommentId,
-      comment: "",
+      message: "",
       postId,
-      userName: session?.user?.name ?? "",
-      userEmail: session?.user?.email ?? "",
-      parentId: parentId || null,
+      userId: user?.id,
+      email: user?.email,
+      parentId: parentId,
     },
   });
 
@@ -52,6 +57,16 @@ const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
     });
   };
 
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        ...form.getValues(),
+        userId: user?.id,
+        email: user?.email,
+      });
+    }
+  }, [user, form]);
+
   return (
     <Form {...form}>
       <form
@@ -61,7 +76,7 @@ const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
         <div className="w-full space-y-2">
           <FormField
             control={form.control}
-            name="comment"
+            name="message"
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormControl>
@@ -82,12 +97,12 @@ const CommentForm = ({ autoFocus = false, parentId = null }: Props) => {
           type="submit"
           className={cn(
             "py-5 h-full",
-            isPending || !session?.user?.email ? "opacity-70" : ""
+            isPending || !user?.email ? "opacity-70" : ""
           )}
-          disabled={isPending || !session?.user?.email}
+          disabled={isPending || !user?.email}
           onClick={() => {
             const validationState =
-              form.getFieldState("comment").error?.message;
+              form.getFieldState("message").error?.message;
             if (validationState) {
               setError(validationState);
             }

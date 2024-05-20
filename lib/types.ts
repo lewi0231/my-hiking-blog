@@ -30,7 +30,6 @@ export interface Post {
   _createdAt: string;
   _updatedAt: string;
   mainImage: { asset: { url: string } };
-  comments: Comment[];
 }
 
 export type Photo = {
@@ -52,19 +51,14 @@ export interface Tag {
 }
 
 export type Comment = {
-  _updatedAt: string;
-  _createdAt: string;
-  _id: string;
+  updated_at?: string;
+  created_at?: string;
+  id: string;
   message: string;
-  parentComment: {
-    _id: string | null;
-  };
-  children: Array<{ _id: string }>;
-  likes: Array<{ _id: string }>;
-  user: Required<User>;
-  post: {
-    _ref: string;
-  };
+  parent_id: string | null;
+  user_id: string;
+  post_id: string;
+  email: string;
 };
 
 export type User = {
@@ -73,21 +67,21 @@ export type User = {
   email: string;
 };
 
-export type LocalComment = {
-  _id: Comment["_id"];
-  message: Comment["message"];
-  _createdAt: Comment["_createdAt"];
-  user: User;
-  post: {
-    _ref: string;
-  };
-  parentComment: {
-    _id: string | null;
-  };
-} & Partial<Omit<Comment, "user">>;
+// export type LocalComment = {
+//   _id: Comment["_id"];
+//   message: Comment["message"];
+//   _createdAt: Comment["_createdAt"];
+//   user: User;
+//   post: {
+//     _ref: string;
+//   };
+//   parentComment: {
+//     _id: string | null;
+//   };
+// } & Partial<Omit<Comment, "user">>;
 
 /**
  * This combines two different type options LocalComment and actual Comment
  * This is used for optimistic updates.
  */
-export type CommentComposite = LocalComment | Comment;
+// export type CommentComposite = LocalComment | Comment;
