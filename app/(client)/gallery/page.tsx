@@ -30,6 +30,8 @@ async function getInstagramFeed() {
 const GalleryPage = async () => {
   const { feed, error } = await getInstagramFeed();
 
+  console.debug("Instagram Feed is", feed);
+
   return (
     <article>
       <Hero

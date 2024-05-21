@@ -30,6 +30,7 @@ export default function RootLayout({
         content="ca-pub-9861112713684008"
       ></meta>
       <body
+        suppressHydrationWarning={true}
         className={cn(
           "min-h-screen bg-background font-sans antialiased relative",
           karla.variable,
