@@ -60,6 +60,7 @@ const GalleryPage = async () => {
                         className="w-full h-full object-cover group-hover:opacity-70 duration-300"
                         width={300}
                         height={300}
+                        unoptimized
                         priority
                       />
                       <span className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-50 opacity-0 group-hover:opacity-100 duration-300">
