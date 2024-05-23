@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/google-analytics";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
@@ -29,6 +30,7 @@ export default function RootLayout({
         name="google-adsense-account"
         content="ca-pub-9861112713684008"
       ></meta>
+      <GoogleAnalytics />
       <body
         // suppressHydrationWarning={true}
         className={cn(
