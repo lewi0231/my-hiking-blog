@@ -51,21 +51,6 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
         setError(data.error);
         setSuccess(data.success);
       });
-      // const response = await fetch("/api/newsletter", {
-      //   method: "POST",
-      //   body: JSON.stringify({ ...values }),
-      // });
-
-      // const data = await response.json();
-
-      // if (data.error) {
-      //   setError(data.error);
-      // } else {
-      //   setModalIsOpen(true);
-
-      //   // Reset form values after successful submission
-      //   resetForm();
-      // }
     });
   };
 
@@ -123,63 +108,6 @@ const NewsletterForm = ({ className, columnInputs = true, label }: Props) => {
             </Button>
           </form>
         </Form>
-
-        {/* <Formik
-          initialValues={{
-            name: "",
-            email: "",
-          }}
-          onSubmit={handleSubmit}
-          validationSchema={newsletterSchema}
-        >
-          {({ errors, touched }) => (
-            <Form
-              className={cn(
-                "flex gap-4",
-                columnInputs ? "flex-col" : "flex-row"
-              )}
-            >
-              <div className="w-full space-y-4">
-                <Field
-                  id="name"
-                  name="name"
-                  placeholder="First name"
-                  type="text"
-                  className={cn(inputStyle, "bg-white py-6")}
-                />
-                {errors.name && touched.name ? (
-                  <div className="pl-2">{errors.name}</div>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="w-full space-y-4">
-                <Field
-                  id="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  type="email"
-                  className={cn(inputStyle, "bg-white py-6")}
-                />
-                {errors.email && touched.email ? (
-                  <div className="pl-2">{errors.email}</div>
-                ) : (
-                  ""
-                )}
-              </div>
-
-              <Button type="submit" size="lg" className="py-6">
-                Subscribe
-              </Button>
-            </Form>
-          )}
-        </Formik>
-        <Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
-          <DialogContent className="flex items-center gap-2 py-4">
-            <CalendarHeart />
-            Congratulations, you&apos;ve successfully signed up.
-          </DialogContent>
-        </Dialog> */}
       </div>
     </section>
   );

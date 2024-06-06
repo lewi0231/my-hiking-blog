@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 /**
  * This server action is used to authenticate the user via supabase api.
  */
-export const login = async (provider: "github" | "google") => {
+export const login = async (provider: "github" | "google" | "facebook") => {
   const supabase = createClient();
   const referer = headers().get("referer");
   console.debug("OAuth to be referred to", referer);
@@ -15,7 +15,7 @@ export const login = async (provider: "github" | "google") => {
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${referer}`,
+      redirectTo: `${referer}#comments`,
     },
   });
 

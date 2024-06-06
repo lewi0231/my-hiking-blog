@@ -14,7 +14,6 @@ async function getInstagramFeed() {
     const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type,timestamp,permalink&access_token=${process.env.INSTAGRAM_API_KEY}`;
     const data = await fetch(url);
 
-    console.debug("Instagram Feed: ", data);
     if (!data.ok) {
       return { error: "There was a problem fetching Instagram Feed" };
     }
@@ -29,8 +28,6 @@ async function getInstagramFeed() {
 
 const GalleryPage = async () => {
   const { feed, error } = await getInstagramFeed();
-
-  console.debug("Instagram Feed is", feed);
 
   return (
     <article>

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 // @ts-ignore
+import { siteConfig } from "@/app/constants";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SearchModal from "./SearchModal";
@@ -261,7 +262,7 @@ const Logo = ({
           alt="Trail Wisdom Logo"
           className="hover:opacity-50 transition-all duration-300"
         /> */}
-        Trail Wisdom.
+        {siteConfig.siteTitle}
       </div>
     </Link>
   );

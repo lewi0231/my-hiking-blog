@@ -1,6 +1,6 @@
 export const siteConfig = {
-  siteTitle: "Trail Wisdom",
-  siteSubtitle: "Self-understanding through adventure.",
+  siteTitle: "Recursive Trails",
+  siteSubtitle: "Trails all the way down.",
   siteURL: "https://trailwisdom.xyz",
   siteDescription:
     "I'm new thru-hiking but I'm also a software developer so I thought that it would be fun to create a blog that documents my journey into thru-hiking.",

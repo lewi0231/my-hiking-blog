@@ -1,7 +1,7 @@
 "use client";
 
 import { login } from "@/lib/auth/actions";
-import { FaGithub } from "react-icons/fa";
+import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "../ui/button";
 
@@ -20,6 +20,15 @@ export const Social = ({ slug }: Props) => {
       >
         <span>Sign in with</span>
         <FcGoogle className="w-5 h-5" />
+      </Button>
+      <Button
+        className="w-full border-[1px] border-opacity-15 shadow-sm rounded-xl border-black flex items-center justify-center gap-2 flex-grow"
+        variant="outline"
+        size="lg"
+        onClick={async () => login("facebook")}
+      >
+        <span>Sign in with</span>
+        <FaFacebook className="w-5 h-5" />
       </Button>
 
       <Button

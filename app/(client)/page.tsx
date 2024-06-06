@@ -39,14 +39,14 @@ export default async function Home() {
             Recent adventures, wellbeing-tips and reviews.
           </p>
           {posts?.length > 0 ? (
-            <PostListComponent posts={posts.slice(0, 3)} />
+            <PostListComponent posts={posts} />
           ) : (
             "No posts at the moment, :'("
           )}
         </section>
 
         <section className="bg-gray-300 flex h-fit">
-          <div className="w-3/4 sm:w-1/2 py-12 px-10 max-w-[400px] m-auto">
+          <div className="w-3/4 sm:w-2/3 py-12 px-10 max-w-[500px] m-auto">
             <NewsletterForm
               columnInputs={false}
               label="Stay up to date"
