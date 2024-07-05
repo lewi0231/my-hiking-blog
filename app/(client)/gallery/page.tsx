@@ -1,3 +1,4 @@
+import { siteConfig } from "@/app/constants";
 import Hero from "@/components/Hero";
 import TooltipWrapper from "@/components/TooltipWrapper";
 import Video from "@/components/Video";
@@ -32,10 +33,10 @@ const GalleryPage = async () => {
   return (
     <article>
       <Hero
-        mainImage={"/path.jpg"}
+        mainImage={siteConfig.featuredImages.galleryImage.url}
         subtitle="Gallery."
         textPosition="bottom-left"
-        imageAlt="Ocean trail"
+        imageAlt={siteConfig.featuredImages.galleryImage.alt}
       />
       {feed && (
         <section className="w-full flex flex-col justify-center items-center px-4 sm:px-8 lg:px-14 bg-gradient-to-l to-gray-200 from-gray-50 h-full py-12">

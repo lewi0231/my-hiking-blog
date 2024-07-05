@@ -4,63 +4,17 @@ import { Button } from "@/components/ui/button";
 import { HandIcon } from "lucide-react";
 
 const AboutPage = () => {
-  const image = siteConfig.pageImages.about;
+  const { url: image, alt: imageAlt } = siteConfig.featuredImages.aboutImage;
 
   return (
     <article>
       <Hero
-        mainImage={"/about_image.jpg"}
+        mainImage={image}
         subtitle="About."
         textPosition="bottom-left"
-        imageAlt="Path along the ocean"
+        imageAlt={imageAlt}
       />
-      {/* <section className="min-h-screen bg-gray-100 flex"> */}
-      {/* <Header title="Blog Posts" /> */}
 
-      {/* <div className=" w-full max-w-[90vw] h-full m-auto mt-24 px-20">
-          <div className="space-y-6  font-raleway">
-            <h2 className=" text-4xl uppercase text-gray-800">
-              What is Trail Wisdom!?
-            </h2>
-            <div className="flex w-full justify-between h-fit tracking-wide">
-              <div className="space-y-4 pt-2  mr-12 leading-loose">
-                <p className="">Currently Trail Wisdom is just me: Paul</p>
-                <p>
-                  (but I hope that this site will become more than just me).
-                </p>
-                <p>
-                  Trail Wisdom emerged from my belief that escaping the comforts
-                  of every day existance can lead to a more direct wisdom and
-                  time to heal.
-                </p>
-                <p>
-                  My goal for this site is to create a forum for discussing the
-                  impact of spending time outside of the normal flow of things.
-                  That is, outside of the expectations, external striving
-                  towards the material and dulling our spirit through
-                  destraction.
-                </p>
-                <p>
-                  Like most, I think, I have had my difficulties with mental
-                  health and from what I have read hiking (or nature) provides a
-                  wonderful antidote for this. For some it seems like this is
-                  escapism, but I am of the opinion that it clears things up.
-                </p>
-              </div>
-
-              <Image
-                width={500}
-                height={500}
-                src={image}
-                alt={"Background Image of Man on Hill"}
-                className="w-1/3 h-1/3 rounded-md"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* <Separator color="#000000" className="bg-white h-full" /> */}
       <section className="bg-white h-full">
         <div className=" w-full max-w-[90vw] h-full m-auto px-4 md:px-20 py-24">
           <div className="m-auto w-full md:w-[600px] space-y-6">

@@ -15,61 +15,60 @@ const Footer = () => {
         <div className="flex justify-between px-14 pt-10 pb-4 items-center text-right">
           <div className="space-y-4 flex md:flex-row flex-col justify-between lg:items-center h-full w-full gap-4">
             {/* <div className="flex flex-shrink lg:flex-row flex-col flex-1 justify-center gap-10"> */}
+
             <FooterBlock wrapperClass="py-4">
-              <TooltipWrapper label="Support this great organisation!">
-                <Button
-                  className="flex justify-start font-semibold gap-2 px-2 w-fit items-center sm:w-[180px]"
-                  size="icon"
-                >
-                  <HeartFilledIcon className="w-4 h-4 sm:w-6 sm:h-6" />
-                  <a
-                    href={process.env.BEYOND_BLUE_DONATION_LINK}
-                    target="__blank"
-                    className="text-xs sm:text-medium"
-                  >
-                    Donate Beyond Blue
-                  </a>
-                </Button>
-              </TooltipWrapper>
+              <>
+                {siteConfig.footerLinks.map((link) => {
+                  return (
+                    <TooltipWrapper
+                      key={link.url}
+                      label="Support this great organisation!"
+                    >
+                      <Button
+                        className="flex justify-start font-semibold gap-2 px-2 w-fit items-center sm:w-[180px]"
+                        size="icon"
+                      >
+                        <HeartFilledIcon className="w-4 h-4 sm:w-6 sm:h-6" />
+                        <a
+                          href={link.url}
+                          target="__blank"
+                          className="text-xs sm:text-medium"
+                        >
+                          Donate {link.organisation}
+                        </a>
+                      </Button>
+                    </TooltipWrapper>
+                  );
+                })}
+              </>
             </FooterBlock>
-            {/* TODO - need to fix stripe implementation */}
-            {/* <TooltipWrapper label="If you'd like to support me"> */}
-            {/* <Button
-                  variant="outline"
-                  className="flex justify-start font-semibold px-2 gap-2 w-fit sm:w-[180px] items-center"
-                  size="icon"
-                >
-                  <CoffeeIcon className="w-4 h-4 sm:w-6 sm:h-6" />
-                  <a
-                    href={process.env.STRIPE_PAYMENT_LINK}
-                    target="__blank"
-                    className="text-xs sm:text-medium"
-                  >
-                    Buy Me a Coffee
-                  </a>
-                </Button> */}
-            {/* </TooltipWrapper> */}
-            {/* </div> */}
+
             <div className="flex flex-col md:flex-row md:justify-end flex-1 md:gap-20 gap-10">
               <FooterBlock title="Get in touch">
                 <ul className="flex flex-col gap-3 items-center">
                   <li className="hover:underline">
                     <TooltipWrapper label="Would you like to contribute content?">
-                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20am%20Interested%20in%20Contributing&body=Hi%20Paul,%0D%0A">
+                      <a
+                        href={`mailto:${siteConfig.contact.email}?subject=I%20am%20Interested%20in%20Contributing&body=Hi%20Paul,%0D%0A`}
+                      >
                         Contribute
                       </a>
                     </TooltipWrapper>
                   </li>
                   <li className="hover:underline">
                     <TooltipWrapper label="Are you looking to collaborate in some way?">
-                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20am%20Interested%20in%20Collaborating&body=Hi%20Paul,%0D%0A">
+                      <a
+                        href={`mailto:${siteConfig.contact.email}?subject=I%20am%20Interested%20in%20Collaborating&body=Hi%20Paul,%0D%0A`}
+                      >
                         Colaboration
                       </a>
                     </TooltipWrapper>
                   </li>
                   <li className="hover:underline">
                     <TooltipWrapper label="Looking for a web developer or undertaking a project together?">
-                      <a href="mailto:trailwisdom.blog@gmail.com?subject=I%20Need%20a%20Web%20Developer&body=Hi%20Paul,%0D%0A">
+                      <a
+                        href={`mailto:${siteConfig.contact.email}?subject=I%20Need%20a%20Web%20Developer&body=Hi%20Paul,%0D%0A`}
+                      >
                         Web Development
                       </a>
                     </TooltipWrapper>
@@ -100,7 +99,7 @@ const Footer = () => {
             <div className="flex gap-5">
               <SocialMediaIcons />
             </div>
-
+            {/* TODO - implement dark mode here?! */}
             {/* {siteConfig.featureToggles.darkMode ? (
               <ThemeSwitch className={styles.icon} />
             ) : null} */}

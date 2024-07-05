@@ -1,13 +1,14 @@
+import { siteConfig } from "@/app/constants";
 import Hero from "@/components/Hero";
 
 const Contact = () => {
   return (
     <article>
       <Hero
-        mainImage="/contact_image.jpg"
+        mainImage={siteConfig.featuredImages.contactImage.url}
         title="Contact"
         textPosition="bottom-left"
-        imageAlt=""
+        imageAlt={siteConfig.featuredImages.contactImage.alt}
       />
     </article>
   );

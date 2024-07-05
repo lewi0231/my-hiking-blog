@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.siteDescription,
   metadataBase: new URL(siteConfig.siteURL),
-  creator: siteConfig.siteCreator,
+  creator: siteConfig.developerDetails.siteCreator,
 };
 
 export default function RootLayout({
@@ -26,13 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta
-        name="google-adsense-account"
-        content="ca-pub-9861112713684008"
-      ></meta>
       <GoogleAnalytics />
       <body
-        // suppressHydrationWarning={true}
         className={cn(
           "min-h-screen bg-background font-sans antialiased relative",
           karla.variable,

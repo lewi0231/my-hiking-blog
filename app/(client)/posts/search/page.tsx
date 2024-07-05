@@ -1,7 +1,7 @@
 import { getAllPostsQuery } from "@/app/utils/queries";
 import { filterPostsByText } from "@/app/utils/utils";
 import Header from "@/components/Header";
-import PostListComponent from "@/components/PostListComponent";
+import PostList from "@/components/posts/PostList";
 import { client } from "@/sanity/lib/client";
 
 type Params = {
@@ -28,7 +28,7 @@ const SearchResultPage = async ({ searchParams }: Params) => {
     <div className=" bg-white h-screen">
       <Header title="Search Results" />
       {posts?.length > 0 ? (
-        <PostListComponent posts={posts} />
+        <PostList posts={posts} />
       ) : (
         <div className="px-20 text-xl text-center pb-20">
           No posts found matching that search.
