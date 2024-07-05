@@ -26,7 +26,7 @@ If you're interested in colaborating on this project (whether you feel the code 
 You can build the project locally by doing the following:
 
 1. Once cloned run `npm install` or whatever your preferred package manager is.
-2. Complete the `.env.local` environment file by adding your info for:
+2. Duplicate the `.env.example` file and rename to `.env.local` environment file by adding your info for:
 
    - sanity
    - supabase
@@ -35,8 +35,10 @@ You can build the project locally by doing the following:
    - instagram api key
      If you have any trouble with any of the above - you should be able to google instructions on what is required. If you think this section needs more detailed instructions please let me know.
 
-3. Once you've done the above you should be able to run `npm run dev` and you're good to go locally.
-4. If you're wanting to deploy, I recommend doing so with Vercel, which is super easy. Just head to: https://vercel.com, signup and deploy and it will guide you through what you need to do.
+3. Recreate the 'About Page' content.
+
+4. Once you've done the above you should be able to run `npm run dev` and you're good to go locally.
+5. If you're wanting to deploy, I recommend doing so with Vercel, which is super easy. Just head to: https://vercel.com, signup and deploy and it will guide you through what you need to do. REMEMBER: You'll need to copy and paste the environment variables into Vercel when you do this.
 
 ## Licensing
 
