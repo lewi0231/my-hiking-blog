@@ -45,7 +45,7 @@ const Footer = () => {
 
             <div className="flex flex-col md:flex-row md:justify-end flex-1 md:gap-20 gap-10">
               <FooterBlock title="Get in touch">
-                <ul className="flex flex-col gap-3 items-center">
+                <ul className="flex flex-col gap-3 items-start">
                   <li className="hover:underline">
                     <TooltipWrapper label="Would you like to contribute content?">
                       <a
@@ -76,7 +76,7 @@ const Footer = () => {
                 </ul>
               </FooterBlock>
               <FooterBlock title="Navigation">
-                <ul className="flex flex-col gap-3 items-center md:items-end w-full">
+                <ul className="flex flex-col gap-3 items-start w-full">
                   <li className="hover:underline">
                     <Link href="/blog">Blog</Link>
                   </li>

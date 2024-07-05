@@ -25,10 +25,10 @@ const SearchResultPage = async ({ searchParams }: Params) => {
   const posts = await getSearchResults(query);
 
   return (
-    <div className=" bg-white h-screen">
+    <div className=" bg-white h-full">
       <Header title="Search Results" />
       {posts?.length > 0 ? (
-        <PostList posts={posts} />
+        <PostList posts={posts} header={false} />
       ) : (
         <div className="px-20 text-xl text-center pb-20">
           No posts found matching that search.
