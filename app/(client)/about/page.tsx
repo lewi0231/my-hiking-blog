@@ -21,8 +21,8 @@ const AboutPage = () => {
             <h2 className=" text-4xl font-semibold">About.</h2>
             <div className="space-y-4 pt-2 text-gray-800 mr-12 leading-loose pb-4 font-medium w-full">
               <p>
-                Trail Wisdom attempts, perhaps ambitiously, to document or
-                capture the wisdom of the trail.{" "}
+                Recursive Trails attempts, perhaps ambitiously, to document or
+                capture the wisdom of the trail.
               </p>
               <p>
                 The idea is that much like going on a meditation retreat,
@@ -34,14 +34,14 @@ const AboutPage = () => {
                 live.
               </p>
               <p>
-                So, Trail Wisdom is all about self-understanding through
+                So, Recursive Trails is all about self-understanding through
                 adventure.
               </p>
               <p>
-                On a personal note, Trail Wisdom has come about in response to
-                my difficulties with mental health and my love of nature.
-                Viewing hiking and nature as a bit of antitode to the stresses
-                of the modern world.
+                On a personal note, Recursive Trails has come about in response
+                to my difficulties with mental health and my love of nature (and
+                my passion for coding, of course!). Viewing hiking and nature as
+                a bit of antitode to the stresses of the modern world.
               </p>
               <p>
                 My time on earth has been a rather restless one, with my

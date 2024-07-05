@@ -255,13 +255,6 @@ const Logo = ({
           "font-east-sea-dokdo"
         )}
       >
-        {/* <Image
-          src="/logo-light.png"
-          width={250}
-          height={250}
-          alt="Trail Wisdom Logo"
-          className="hover:opacity-50 transition-all duration-300"
-        /> */}
         {siteConfig.siteTitle}
       </div>
     </Link>

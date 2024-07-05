@@ -26,7 +26,7 @@ const BlogPage = async () => {
         imageAlt={alt}
       />
 
-      <div className=" bg-gradient-to-r via-gray-300 to-gray-100 from-white py-20">
+      <div className="">
         {posts?.length > 0 ? (
           <PostList posts={posts} />
         ) : (
